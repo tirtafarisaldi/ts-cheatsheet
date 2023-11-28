@@ -64,8 +64,8 @@ A set of TypeScript related notes used for quick reference. The cheatsheet conta
     - [Optional Properties](#optional-properties)
     - [Index Signatures (Dynamic Property Names)](#index-signatures-dynamic-property-names)
     - [Implements Keyword](#implements-keyword)
-      - [*1.* Implementing an `interface` to a `Class`](#1-implementing-an-interface-to-a-class)
-      - [*2.* Implementing an `interface` to a `function`](#2-implementing-an-interface-to-a-function)
+      - [_1._ Implementing an `interface` to a `Class`](#1-implementing-an-interface-to-a-class)
+      - [_2._ Implementing an `interface` to a `function`](#2-implementing-an-interface-to-a-function)
     - [Extends Keyword (Interface Inheritance)](#extends-keyword-interface-inheritance)
   - [`Omit` type when extending an interface](#omit-type-when-extending-an-interface)
   - [Omitting specific properties when extending an interface](#omitting-specific-properties-when-extending-an-interface)
@@ -109,15 +109,12 @@ A set of TypeScript related notes used for quick reference. The cheatsheet conta
     - [useLayoutEffect](#uselayouteffect)
     - [useDebugValue](#usedebugvalue)
     - [Custom Hooks](#custom-hooks)
-  - [Feedback](#feedback)
-  - [Collaborators](#collaborators)
-  - [Contribute](#contribute)
 
 ---
 
 ## Introduction
 
-TypeScript is a very powerful addition to JavaScript. TypeScript is developed by Microsoft and is increasingly supported by the day  by technologies such as Angular, Vue.js 3, React.js, and many others.
+TypeScript is a very powerful addition to JavaScript. TypeScript is developed by Microsoft and is increasingly supported by the day by technologies such as Angular, Vue.js 3, React.js, and many others.
 
 As TypeScript code can be compiled to ES5, it includes all of the native JavaScript features such as spread arrow function, deconstructors, and introduces some **very** useful features such as decorators, generics and interfaces, enums, modules, among others which can be found in different programming languages.
 
@@ -138,7 +135,7 @@ As TypeScript code can be compiled to ES5, it includes all of the native JavaScr
 > Another fundamental part of creating programs in JavaScript for webpages and servers alike is working with textual data. As in other languages, we use the type string to refer to these textual datatypes. Just like JavaScript, TypeScript also uses double quotes (") or single quotes (') to surround string data.
 
 ```ts
-  const myName: string = 'Robert';
+const myName: string = "Robert";
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -148,7 +145,7 @@ As TypeScript code can be compiled to ES5, it includes all of the native JavaScr
 > As in JavaScript, all numbers in TypeScript are floating point values. These floating point numbers get the type `number`. In addition to hexadecimal and decimal literals, TypeScript also supports binary and octal literals introduced in ECMAScript 2015.
 
 ```ts
-  const myAge: number = 24;
+const myAge: number = 24;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -158,7 +155,7 @@ As TypeScript code can be compiled to ES5, it includes all of the native JavaScr
 > The most basic datatype is the simple `true`/`false` value, which JavaScript and TypeScript call a `boolean` value.
 
 ```ts
-  const bHasHobbies: boolean = true;
+const bHasHobbies: boolean = true;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -168,13 +165,13 @@ As TypeScript code can be compiled to ES5, it includes all of the native JavaScr
 > TypeScript, like JavaScript, allows you to work with arrays of values. Array types can be written in one of two ways. In the first, you use the type of the elements followed by [] to denote an array of that element type:
 
 ```ts
-  const hobbies: string[] = ['Programming', 'Cooking'];
+const hobbies: string[] = ["Programming", "Cooking"];
 ```
 
 If no types are declared, TypeScript will automatically assign a type depending on the types of the Array values.
 
 ```ts
-  const numbers = [1, 3.22, 6, -1] // This variable will automatically be assigned a number[] array type.
+const numbers = [1, 3.22, 6, -1]; // This variable will automatically be assigned a number[] array type.
 ```
 
 **Note that declaring types is encouraged**.
@@ -186,7 +183,7 @@ If no types are declared, TypeScript will automatically assign a type depending 
 > Tuple types allow you to express an array where the type of a fixed number of elements is known, but need not be the same. For example, you may want to represent a value as a pair of a `string` and a `number`:
 
 ```ts
-  const address: [string, number] = ["Street", 99];
+const address: [string, number] = ["Street", 99];
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -196,13 +193,13 @@ If no types are declared, TypeScript will automatically assign a type depending 
 > We may need to describe the type of variables that we do not know when we are writing an application. These values may come from dynamic content, e.g. from the user or a 3rd party library. In these cases, we want to opt-out of type-checking and let the values pass through compile-time checks. To do so, we label these with the `any` type:
 
 ```ts
-  let myCar: any = 'BMW';
+let myCar: any = "BMW";
 
-  console.log(myCar); // Prints: BMW
+console.log(myCar); // Prints: BMW
 
-  myCar = { brand: 'BMW', series: 3 };
+myCar = { brand: "BMW", series: 3 };
 
-  console.log(myCar) // Prints: { brand: "BMW", series: 3 }
+console.log(myCar); // Prints: { brand: "BMW", series: 3 }
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -210,19 +207,19 @@ If no types are declared, TypeScript will automatically assign a type depending 
 ### Enums
 
 > A helpful addition to the standard set of datatypes from JavaScript is the enum. As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.
-By default, any `enum` will begin numbering their members starting at 0. You can change this by manually setting the value of one of its members. For example, we can modify the Green value to 100, the next will be 101, then set Yellow back to 2.
+> By default, any `enum` will begin numbering their members starting at 0. You can change this by manually setting the value of one of its members. For example, we can modify the Green value to 100, the next will be 101, then set Yellow back to 2.
 
 ```ts
-  enum Color {
-    Gray, // 0
-    Red, // 1
-    Green = 100, // 100
-    Blue, // 101
-    Yellow = 2 // 2
-  }
+enum Color {
+  Gray, // 0
+  Red, // 1
+  Green = 100, // 100
+  Blue, // 101
+  Yellow = 2, // 2
+}
 
-  const myColor: Color = Color.Green
-  console.log(myColor); // Prints: 100
+const myColor: Color = Color.Green;
+console.log(myColor); // Prints: 100
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -235,11 +232,11 @@ Functions as you may expect work exactly the same as in JavaScript with a couple
 - Function types.
 
 ```ts
-  function returnMyName(myName): string {
-    return myName;
-  }
+function returnMyName(myName): string {
+  return myName;
+}
 
-  console.log(returnMyName('Robert')) // Prints: Robert
+console.log(returnMyName("Robert")); // Prints: Robert
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -249,13 +246,13 @@ Functions as you may expect work exactly the same as in JavaScript with a couple
 In TypeScript any argument of a function may be assigned a type no matter how complex, for example:
 
 ```ts
-  // argument types
-  function multiply(value1: number, value2: number) {
-    return value1 * value2;
-  }
+// argument types
+function multiply(value1: number, value2: number) {
+  return value1 * value2;
+}
 
-  // console.log(multiply('Robert', 5)) // Not possible, both arguments must be of type number.
-  console.log(multiply(10,5)) // Prints: 50
+// console.log(multiply('Robert', 5)) // Not possible, both arguments must be of type number.
+console.log(multiply(10, 5)); // Prints: 50
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -265,12 +262,12 @@ In TypeScript any argument of a function may be assigned a type no matter how co
 Just like the argument, the **return value** of a function may be assigned a type. Consider the example above to be included into the example below:
 
 ```ts
-  const myMultiply: (val1: number, val2: number) => number;
-  // myMultiply = sayHello; // Not possible.
-  // myMultiply(); // Not possible.
-  myMultiply = multiply;
+const myMultiply: (val1: number, val2: number) => number;
+// myMultiply = sayHello; // Not possible.
+// myMultiply(); // Not possible.
+myMultiply = multiply;
 
-  console.log(myMultiply(5, 2));
+console.log(myMultiply(5, 2));
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -280,16 +277,16 @@ Just like the argument, the **return value** of a function may be assigned a typ
 > The type `void` is a little like the opposite of `any`: the absence of having any type at all. You may commonly see this as the return type of functions that do not return a value:
 
 ```ts
-  function sayHello(): void {
-    console.log('Hello!');
-    // return myName; // Not possible because the function can't return anything due to the void assigned type (more on this below).
-  }
+function sayHello(): void {
+  console.log("Hello!");
+  // return myName; // Not possible because the function can't return anything due to the void assigned type (more on this below).
+}
 ```
 
 > Declaring variables of type `void` is not useful because you can only assign `undefined` or `null` to them:
 
 ```ts
-  let unusable: void = undefined;
+let unusable: void = undefined;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -301,22 +298,22 @@ Just like the argument, the **return value** of a function may be assigned a typ
 In JavaScript, so as in TypeScript, Objects are comprised of key-value pairs. We can assign types to the `object` key-value pairs, like so:
 
 ```ts
-  let userData: { name: string, age: number } = {
-    name: 'Max',
-    age: 27
-  };
-  // userData = { // Not valid
-  //   name: 2,
-  //   age: 'Age'
-  // };
-  // userData = { // Not valid
-  //   a: 'Robert',
-  //   b: 24
-  // };
-  userData = {
-    name: 'Robert',
-    age: 24
-  };
+let userData: { name: string; age: number } = {
+  name: "Max",
+  age: 27,
+};
+// userData = { // Not valid
+//   name: 2,
+//   age: 'Age'
+// };
+// userData = { // Not valid
+//   a: 'Robert',
+//   b: 24
+// };
+userData = {
+  name: "Robert",
+  age: 24,
+};
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -326,35 +323,35 @@ In JavaScript, so as in TypeScript, Objects are comprised of key-value pairs. We
 As you may expect, the assigned types to the `object` key-value pairs can reach high levels of complexity, for example:
 
 ```ts
-  let complex: { data: number[], output: (all: boolean) => number[] } = {
-    data: [100, 3,99, 10],
-    output: function(all: boolean): number[] {
-      return this.data
-    }
-  };
-  // complex = {}; // Not possible.
+let complex: { data: number[]; output: (all: boolean) => number[] } = {
+  data: [100, 3, 99, 10],
+  output: function (all: boolean): number[] {
+    return this.data;
+  },
+};
+// complex = {}; // Not possible.
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
 
 #### Optional object properties
 
-In TypeScript, all newly declared **object properties** (including both **function parameters**, and **interface properties**) may be declared as *optional*. To do so, we must place a `?` character after the key (or name) of the property when declaring it (a postfix notation). Here's an example:
+In TypeScript, all newly declared **object properties** (including both **function parameters**, and **interface properties**) may be declared as _optional_. To do so, we must place a `?` character after the key (or name) of the property when declaring it (a postfix notation). Here's an example:
 
 ```ts
-  const right: { name: string, age?: number } = {
-    name: 'Robert'
-  };
+const right: { name: string; age?: number } = {
+  name: "Robert",
+};
 
-  const alsoRight: { name: string, age?: number } = {
-    name: 'Robert',
-    age: 24
-  };
+const alsoRight: { name: string; age?: number } = {
+  name: "Robert",
+  age: 24,
+};
 
-  // This is not possible because the name key-value pair is missing.
-  // const wrong: { name: string, age?: number } = {
-  //   age: 24
-  // };
+// This is not possible because the name key-value pair is missing.
+// const wrong: { name: string, age?: number } = {
+//   age: 24
+// };
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -364,14 +361,14 @@ In TypeScript, all newly declared **object properties** (including both **functi
 Writing complex and long types can quickly become dull and impractical. For a DRY approach, it's possible to create aliases for types, essentially creating your own types. Here's an example using the complex object above:
 
 ```ts
-  type Complex = { data: number[], output: (all: boolean) => number[] };
+type Complex = { data: number[]; output: (all: boolean) => number[] };
 
-  let complex2: Complex  = {
-    data: [100, 3,99, 10],
-    output: function(all: boolean): number[] {
-      return this.data
-    }
-  };
+let complex2: Complex = {
+  data: [100, 3, 99, 10],
+  output: function (all: boolean): number[] {
+    return this.data;
+  },
+};
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -381,18 +378,18 @@ Writing complex and long types can quickly become dull and impractical. For a DR
 Variables are not restricted to only one assigned type. This is where union types come in where we can assign two or more types (e.g. assign `number` and `string`) to a single variable. For example:
 
 ```ts
-  let myRealRealAge: number | string = 24;
-  myRealRealAge = '24';
-  // myRealRealAge = true // Not possible since myRealRealAge only accepts a number or a string.
+let myRealRealAge: number | string = 24;
+myRealRealAge = "24";
+// myRealRealAge = true // Not possible since myRealRealAge only accepts a number or a string.
 ```
 
 ### Intersection
 
-Intersection types are similar to union types (and similar to the `extend` keyword pattern, which is explained further down), but arguably less common (yet, at least equally useful). Before we get into what an intersection type is, I must mention that in the [TypeScript official documentation about the intersection types](https://www.typescriptlang.org/docs/handbook/advanced-types.html), they are showcased first and *before* the union types, however in this guide I will mention them *after* the union types because they have a bit of a more abstract definition.
+Intersection types are similar to union types (and similar to the `extend` keyword pattern, which is explained further down), but arguably less common (yet, at least equally useful). Before we get into what an intersection type is, I must mention that in the [TypeScript official documentation about the intersection types](https://www.typescriptlang.org/docs/handbook/advanced-types.html), they are showcased first and _before_ the union types, however in this guide I will mention them _after_ the union types because they have a bit of a more abstract definition.
 
-Since it's a rather abstract concept, to give you an idea of what an intersection type is, think of the famous `React.js` package, `react-redux`, and its [`compose` function](https://redux.js.org/api/compose). A [brief look of the code snippet](https://github.com/reduxjs/redux/blob/c43fc3a7c7048c0dba614bc6fbea1b22740d5176/src/compose.ts) will show us how all of the arguments of the `compose` function are *mixed* into one single `function`. This is essentially what the the intersection types do, they *mix* an N number of types to create a new one, so long as they are compatible.
+Since it's a rather abstract concept, to give you an idea of what an intersection type is, think of the famous `React.js` package, `react-redux`, and its [`compose` function](https://redux.js.org/api/compose). A [brief look of the code snippet](https://github.com/reduxjs/redux/blob/c43fc3a7c7048c0dba614bc6fbea1b22740d5176/src/compose.ts) will show us how all of the arguments of the `compose` function are _mixed_ into one single `function`. This is essentially what the the intersection types do, they _mix_ an N number of types to create a new one, so long as they are compatible.
 
-In TypeScript, an intersection type is simply a mix (more commonly referred to as a ***mixin***) between two or more types.
+In TypeScript, an intersection type is simply a mix (more commonly referred to as a **_mixin_**) between two or more types.
 
 **Note however, that this does not mean that you can freely use intersection types anywhere**. For example, this simple declaration will make the compiler throw an error:
 
@@ -404,39 +401,39 @@ The reason is because `5` is not assignable to type `string`. And that is becaus
 
 Without getting too much into it, the way TypeScript compares types is based on their members. Since at least 1 of the members between the types `string` and `number` clash, the intersection of these types is not possible.
 
-**That** is the limitation of the intersection types. The intersected types *must* be compatible, by this, I mean that **their properties must not overlap each other**. If this condition is met, **the resulting type will have access to all properties**.
+**That** is the limitation of the intersection types. The intersected types _must_ be compatible, by this, I mean that **their properties must not overlap each other**. If this condition is met, **the resulting type will have access to all properties**.
 
-Because of the previously mentioned limitation, intersection types are less common than union types, they would be *very* hard to use on variables with "basic" levels of types. Fortunately for us, by using `interfaces` ([explained here](#interfaces)) (and other advanced types), intersection types become ***very*** useful. Let's take a look at a more advanced example (which assumes the reader has at least basic knowledge of interfaces):
+Because of the previously mentioned limitation, intersection types are less common than union types, they would be _very_ hard to use on variables with "basic" levels of types. Fortunately for us, by using `interfaces` ([explained here](#interfaces)) (and other advanced types), intersection types become **_very_** useful. Let's take a look at a more advanced example (which assumes the reader has at least basic knowledge of interfaces):
 
 ```ts
 interface Loggable {
-    log(name: string, age: number): void
+  log(name: string, age: number): void;
 }
 
 interface Person {
-    name: string
-    age: number
-    isStark?: boolean // May be undefined.
+  name: string;
+  age: number;
+  isStark?: boolean; // May be undefined.
 }
 
 type LoggablePerson = Loggable & Person;
 
-const logPerson:(name: string, age: number) => void = (name, age) => {
-    console.log(`I am ${name}, and I am ${age} years old.`)
-}
+const logPerson: (name: string, age: number) => void = (name, age) => {
+  console.log(`I am ${name}, and I am ${age} years old.`);
+};
 
 const jonSnow: LoggablePerson = {
-    name: "Jon Snow",
-    age: 23,
-    log: logPerson
-}
+  name: "Jon Snow",
+  age: 23,
+  log: logPerson,
+};
 
-console.log('jonSnow.name ->', jonSnow.name); // Prints: "Jon Snow"
-console.log('jonSnow.age ->', jonSnow.age); // Prints: 23
-console.log('jonSnow.isStark ->', jonSnow.isStark); // Prints: undefined
+console.log("jonSnow.name ->", jonSnow.name); // Prints: "Jon Snow"
+console.log("jonSnow.age ->", jonSnow.age); // Prints: 23
+console.log("jonSnow.isStark ->", jonSnow.isStark); // Prints: undefined
 console.log(
-    'jonSnow.log(jonSnow.name, jonSnow.age) ->',
-    jonSnow.log(jonSnow.name, jonSnow.age)
+  "jonSnow.log(jonSnow.name, jonSnow.age) ->",
+  jonSnow.log(jonSnow.name, jonSnow.age)
 ); // Prints: I am Jon Snow, and I am 23 years old.
 ```
 
@@ -449,10 +446,10 @@ console.log(
 Programmatically checking for types work exactly as it works in JavaScript:
 
 ```ts
-  let finalValue = 'A string';
-  if (typeof finalValue == 'string') {
-    console.log('finalValue is a string');
-  }
+let finalValue = "A string";
+if (typeof finalValue == "string") {
+  console.log("finalValue is a string");
+}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -462,9 +459,9 @@ Programmatically checking for types work exactly as it works in JavaScript:
 > The `never` type represents the type of values that never occur. For instance, `never` is the return type for a function expression or an arrow function expression **that always throws an exception or one that never returns**; Variables also acquire the type `never` when narrowed by any type guards that can never be true.
 
 ```ts
-  function neverReturns(): never {
-    throw new Error('An error!');
-  }
+function neverReturns(): never {
+  throw new Error("An error!");
+}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -474,13 +471,13 @@ Programmatically checking for types work exactly as it works in JavaScript:
 > In TypeScript, both `undefined` and `null` actually have their own types named `undefined` and `null` respectively. Much like `void`, they’re not extremely useful on their own:
 
 ```ts
-  let canBeNull: null | number = 12;
+let canBeNull: null | number = 12;
 
-  canBeNull = null;
-  let canAlsoBeNull;
-  canAlsoBeNull = null;
-  let canThisBeAny = null;
-  canThisBeAny = 12;
+canBeNull = null;
+let canAlsoBeNull;
+canAlsoBeNull = null;
+let canThisBeAny = null;
+canThisBeAny = 12;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -493,15 +490,15 @@ Programmatically checking for types work exactly as it works in JavaScript:
 Type assertions have two forms. One is the “angle-bracket” syntax, which is fine, except for JSX (read React) code because JSX works with angle-bracket syntax itself:
 
 ```ts
-  const someValue: any = "this is a string";
-  const strLength: number = (<string>someValue).length;
+const someValue: any = "this is a string";
+const strLength: number = (<string>someValue).length;
 ```
 
 And the other is the one used with JSX, namely the `as`-syntax:
 
 ```ts
-  const someValue: any = "this is a string";
-  const strLength: number = (someValue as string).length;
+const someValue: any = "this is a string";
+const strLength: number = (someValue as string).length;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -515,10 +512,10 @@ TypeScript natively supports the newer ES6 (A.K.A. ECMAScript 6 and ECMAScript 2
 ### Template Literals
 
 ```ts
-  const userName = 'Robert';
-  const greeting = `Hello I'm ${userName}`;
+const userName = "Robert";
+const greeting = `Hello I'm ${userName}`;
 
-  console.log(greeting)
+console.log(greeting);
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -528,9 +525,9 @@ TypeScript natively supports the newer ES6 (A.K.A. ECMAScript 6 and ECMAScript 2
 Arrow function arguments can be assigned any type.
 
 ```ts
-  const greet = (name: string = 'Robert') => console.log(`Hello, ${name}`);
+const greet = (name: string = "Robert") => console.log(`Hello, ${name}`);
 
-  greet('Robert Molina');
+greet("Robert Molina");
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -540,9 +537,9 @@ Arrow function arguments can be assigned any type.
 Arrow functions may also be defined with default argument values in case no respective arguments were passed, these default parameters may also be of any assigned type.
 
 ```ts
-  const greet = (name: string = 'Robert') => console.log(`Hello, ${name}`);
+const greet = (name: string = "Robert") => console.log(`Hello, ${name}`);
 
-  greet(); // Prints: "Robert"
+greet(); // Prints: "Robert"
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -552,13 +549,13 @@ Arrow functions may also be defined with default argument values in case no resp
 > Spread syntax allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
 
 ```ts
-  const numbers: number[] = [-3, 33, 38, 5];
+const numbers: number[] = [-3, 33, 38, 5];
 
-  console.log(Math.min(...numbers));
+console.log(Math.min(...numbers));
 
-  const newArray: number[] = [55, 20, ...numbers];
+const newArray: number[] = [55, 20, ...numbers];
 
-  console.log(newArray);
+console.log(newArray);
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -568,10 +565,10 @@ Arrow functions may also be defined with default argument values in case no resp
 Arrays may also be destructured in TypeScript, keep in mind that all the assigned types to the array values won't be lost when destructured.
 
 ```ts
-  const testResults: number[] = [3.89, 2.99, 1.38];
-  const [result1, result2, result3] = testResults;
+const testResults: number[] = [3.89, 2.99, 1.38];
+const [result1, result2, result3] = testResults;
 
-  console.log(result1, result2, result3);
+console.log(result1, result2, result3);
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -581,10 +578,13 @@ Arrays may also be destructured in TypeScript, keep in mind that all the assigne
 Just like arrays, the destructured object value pairs will keep their previously assigned types. Keep in mind that when destructuring an object, the declared variable name **must** match the object key to let the compiler know which variable to destructure.
 
 ```ts
-  const scientist: { firstName: string, experience: number } = { firstName: 'Robert', experience: 9000 };
-  const { firstName, experience } = scientist;
+const scientist: { firstName: string; experience: number } = {
+  firstName: "Robert",
+  experience: 9000,
+};
+const { firstName, experience } = scientist;
 
-  console.log(firstName, experience);
+console.log(firstName, experience);
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -600,30 +600,34 @@ TypeScript offers `public`, `private`, and protected modifiers to every class me
 **You may still mark a member public explicitly. For example:**
 
 ```ts
-  class Person {
-    private type: string | null = null;
-    protected age: number = 23;
+class Person {
+  private type: string | null = null;
+  protected age: number = 23;
 
-    constructor(public name: string, public userName: string, private email: string) {
-      this.name = name;
-      this.userName = userName;
-      this.email = email;
-    }
-
-    public printAge = () => {
-      console.log(this.age);
-      this.setType('Young guy');
-    }
-
-    private setType = (type: string) => {
-      this.type = type;
-      console.log(this.type);
-    }
+  constructor(
+    public name: string,
+    public userName: string,
+    private email: string
+  ) {
+    this.name = name;
+    this.userName = userName;
+    this.email = email;
   }
 
-  const person = new Person('Francisco', 'rmolinamir', 'example@email.com');
-  person.printAge(); // Prints: 23
-  // person.setType('Cool guy'); // Not possible, since setType is a private member of Person.
+  public printAge = () => {
+    console.log(this.age);
+    this.setType("Young guy");
+  };
+
+  private setType = (type: string) => {
+    this.type = type;
+    console.log(this.type);
+  };
+}
+
+const person = new Person("Francisco", "rmolinamir", "example@email.com");
+person.printAge(); // Prints: 23
+// person.setType('Cool guy'); // Not possible, since setType is a private member of Person.
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -633,48 +637,52 @@ TypeScript offers `public`, `private`, and protected modifiers to every class me
 When a member is marked `private`, it cannot be accessed from outside of its containing class. **However, should a class `X` inherit properties from `Person`, class `A` will be able to access all private properties from `Person` (e.g. `type and setType`) due to being inside (or having access to) the protected scope**. More on what class inheritance is all about just below, but here's an example;
 
 ```ts
-  class Type {
-      private type: string | null = null;
+class Type {
+  private type: string | null = null;
 
-      setType = (type: string) => {
-        this.type = type;
-        console.log(this.type);
-      }
+  setType = (type: string) => {
+    this.type = type;
+    console.log(this.type);
+  };
+}
+
+class Person extends Type {
+  protected age: number = 23;
+
+  constructor(
+    public name: string,
+    public userName: string,
+    private email: string
+  ) {
+    super();
+    this.name = name;
+    this.userName = userName;
+    this.email = email;
   }
 
-  class Person extends Type {
-      protected age: number = 23;
+  public printAge = () => {
+    console.log(this.age);
+    this.setType("Young guy");
+  };
+}
 
-      constructor(public name: string, public userName: string, private email: string) {
-        super()
-        this.name = name;
-        this.userName = userName;
-        this.email = email;
-      }
+const person = new Person("Rob", "rm", "email");
 
-      public printAge = () => {
-        console.log(this.age);
-        this.setType('Young guy');
-      }
-  }
+person.setType("Cool guy"); // Prints: Cool guy
 
-  const person = new Person('Rob', 'rm', 'email');
-
-  person.setType('Cool guy'); // Prints: Cool guy
-
-  console.log(person); // Prints:
-  /**
-   * Person
-   *
-   * age: 23
-   * email: "email"
-   * name: "Rob"
-   * printAge: ƒ ()
-   * setType: ƒ (type)
-   * type: "Cool guy"
-   * userName: "rm"
-   *
-   */
+console.log(person); // Prints:
+/**
+ * Person
+ *
+ * age: 23
+ * email: "email"
+ * name: "Rob"
+ * printAge: ƒ ()
+ * setType: ƒ (type)
+ * type: "Cool guy"
+ * userName: "rm"
+ *
+ */
 ```
 
 If you want to prevent some properties or classes for being inherited, there is currently a proposal for the `final` keyword to be added.
@@ -693,17 +701,17 @@ Links:
 Classes may also be extended. By extending a class, we can declare another class that **inherits** all of the parent class members, for example:
 
 ```ts
-  class Robert extends Person {
-    constructor(userName: string, email: string) {
-      super('Robert Molina', userName, email);
-      this.age = 25;
-      this.printAge()
-    }
+class Robert extends Person {
+  constructor(userName: string, email: string) {
+    super("Robert Molina", userName, email);
+    this.age = 25;
+    this.printAge();
   }
+}
 
-  const robert = new Robert('rmolinamir', 'example@email.com');
+const robert = new Robert("rmolinamir", "example@email.com");
 
-  console.log(robert);
+console.log(robert);
 ```
 
 The class Robert, would be able to access all of the Person members, and overwrite them if possible. **Note that `super` has to be called in the constructor of the Robert class, to execute any logic that may be stored inside the parent Person class' constructor. If not called, side effects may happen**.
@@ -715,31 +723,31 @@ The class Robert, would be able to access all of the Person members, and overwri
 TypeScript offers two great features for classes: `get`, and `set`. These are keywords that can be used to create a getter or setter function that can share the same name, and run whatever logic the programmer decides to pass into. Here's an example:
 
 ```ts
-  class Plant {
-    private _species: string = 'Default';
-    get species() {
-      return this._species;
-    }
-    set species(value: string) {
-      if (value.length > 3) {
-        this._species = value;
-      } else {
-        this._species = 'Default';
-      }
-    }
-    public getSpecies = () => this._species
+class Plant {
+  private _species: string = "Default";
+  get species() {
+    return this._species;
   }
+  set species(value: string) {
+    if (value.length > 3) {
+      this._species = value;
+    } else {
+      this._species = "Default";
+    }
+  }
+  public getSpecies = () => this._species;
+}
 
-  const plant = new Plant();
+const plant = new Plant();
 
-  console.log(plant.species); // Prints Default
-  plant.species = 'AB';
-  console.log(plant.species); // Prints Default
-  plant.species = 'Green Plant';
-  console.log(plant.species); // Prints Green Plant
+console.log(plant.species); // Prints Default
+plant.species = "AB";
+console.log(plant.species); // Prints Default
+plant.species = "Green Plant";
+console.log(plant.species); // Prints Green Plant
 ```
 
-To `set` *species*, we would do an expression such as `plant.species = 'AB';`, and to `get` *species*, we would simply refer to the *species* property of the `plant` object.
+To `set` _species_, we would do an expression such as `plant.species = 'AB';`, and to `get` _species_, we would simply refer to the _species_ property of the `plant` object.
 
 [⬆️ Back to top](#table-of-contents)<br>
 
@@ -748,16 +756,16 @@ To `set` *species*, we would do an expression such as `plant.species = 'AB';`, a
 Static properties and methods are class members that can be accessed from an outer scope of the `class`, **and** without having to instantiate the class either. Here's an example:
 
 ```ts
-  class Helpers {
-    static PI: number = 3.14;
-    static calcCircumference(diameter: number): number {
-      return this.PI * diameter;
-    }
+class Helpers {
+  static PI: number = 3.14;
+  static calcCircumference(diameter: number): number {
+    return this.PI * diameter;
   }
+}
 
-  console.log(Helpers.PI); // Prints: 3.14
-  console.log(2 * Helpers.PI); // Prints: 6.28
-  console.log(Helpers.calcCircumference(10)); // Prints: 31.42
+console.log(Helpers.PI); // Prints: 3.14
+console.log(2 * Helpers.PI); // Prints: 6.28
+console.log(Helpers.calcCircumference(10)); // Prints: 31.42
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -778,14 +786,14 @@ A great comparison and example for `abstract classes` is the React.js `Component
 The following is an example of a TypeScript abstract class definition:
 
 ```ts
-  abstract class Project {
-    projectName: string = 'Default';
-    budget: number = 0;
-    abstract changeName(name: string): void;
-    calcBudget() {
-      return this.budget * 2;
-    }
+abstract class Project {
+  projectName: string = "Default";
+  budget: number = 0;
+  abstract changeName(name: string): void;
+  calcBudget() {
+    return this.budget * 2;
   }
+}
 ```
 
 > Methods within an `abstract class` that are marked as `abstract` **do not contain an implementation and must be implemented in derived classes**. Abstract methods share a similar syntax to interface methods. Both define the signature of a method without including a method body. However, abstract methods must include the `abstract` keyword and may optionally include access modifiers.
@@ -793,20 +801,20 @@ The following is an example of a TypeScript abstract class definition:
 Think of `abstract` methods as methods that **won't** be passed down to the inheritor classes.
 
 ```ts
-  class ITProject extends Project {
-    changeName = (name: string) => {
-      this.projectName = name;
-    }
-  }
+class ITProject extends Project {
+  changeName = (name: string) => {
+    this.projectName = name;
+  };
+}
 
-  const newProject = new ITProject();
+const newProject = new ITProject();
 
-  console.log(newProject) // Prints: { projectName: "Default", budget: 0, ...  }
-  newProject.changeName('Super IT Project');
-  console.log(newProject); // Prints: { projectName: "'Super IT Project", budget: 0, ...  }
-  newProject.budget = 1000;
-  console.log(newProject.budget); // Prints: 1000
-  console.log(newProject.calcBudget()); // Prints: 2000
+console.log(newProject); // Prints: { projectName: "Default", budget: 0, ...  }
+newProject.changeName("Super IT Project");
+console.log(newProject); // Prints: { projectName: "'Super IT Project", budget: 0, ...  }
+newProject.budget = 1000;
+console.log(newProject.budget); // Prints: 1000
+console.log(newProject.calcBudget()); // Prints: 2000
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -824,31 +832,31 @@ In TypeScript 2.0 and onwards, we can create a static class member method that I
 If it already exists, we can always return the previously created instance, here's an example with a class named `OnlyOne`:
 
 ```ts
-  class OnlyOne {
-    private static instance: OnlyOne; // Member variable that will store the OnlyOne instance.
+class OnlyOne {
+  private static instance: OnlyOne; // Member variable that will store the OnlyOne instance.
 
-    /**
-     * Read only property that can not be modified nor accessed outside of the class.
-     */
-    private constructor(public readonly name: string) {}
+  /**
+   * Read only property that can not be modified nor accessed outside of the class.
+   */
+  private constructor(public readonly name: string) {}
 
-    /**
-     * If get instance has not been initialized then it will construct a new OnlyOne class object,
-     * then store it into the instance property. If it has already been created then it will simply
-     * return the instance property.
-     * This assures that there will only ever be one instance.
-     */
-    static getInstance() {
-      if (!OnlyOne.instance) {
-        OnlyOne.instance = new OnlyOne('The Only One');
-      }
-      return OnlyOne.instance;
+  /**
+   * If get instance has not been initialized then it will construct a new OnlyOne class object,
+   * then store it into the instance property. If it has already been created then it will simply
+   * return the instance property.
+   * This assures that there will only ever be one instance.
+   */
+  static getInstance() {
+    if (!OnlyOne.instance) {
+      OnlyOne.instance = new OnlyOne("The Only One");
     }
+    return OnlyOne.instance;
   }
+}
 
-  // const wrongWay = new OnlyOne('The Only One') // Not Possible
-  const rightWay = OnlyOne.getInstance();
-  const anotherWay = OnlyOne.getInstance(); // Works too.
+// const wrongWay = new OnlyOne('The Only One') // Not Possible
+const rightWay = OnlyOne.getInstance();
+const anotherWay = OnlyOne.getInstance(); // Works too.
 ```
 
 In the above example, the variables `rightWay` and `anotherWay` would be pointers (think `C++`) to the same instance of `OnlyOne`. As you can see, to initiate `OnlyOne` we have to call `getInstance` instead of running the constructor from an outter scope of the `OnlyOne` class.
@@ -881,24 +889,24 @@ The module code generation may be specified in the `tsconfig.json` file. **The c
 Exporting a `variable` and a `function`:
 
 ```ts
-  export const PI = 3.14;
+export const PI = 3.14;
 
-  export const calculateCircumference = (diameter: number) => {
-    return diameter * PI;
-  }
+export const calculateCircumference = (diameter: number) => {
+  return diameter * PI;
+};
 ```
 
 Exporting an `interface` for a react.js `class` component's state:
 
 ```tsx
-  export interface IAppState {
-    counterValue: number;
-  }
+export interface IAppState {
+  counterValue: number;
+}
 
-  class App extends React.Component<{} /* IAppProps */, IAppState> {
-    public state = { counterValue: 0 }; // State is required to be public.
-    // ...
-  }
+class App extends React.Component<{} /* IAppProps */, IAppState> {
+  public state = { counterValue: 0 }; // State is required to be public.
+  // ...
+}
 ```
 
 Exporting an `interface` for a react.js `functional` component `onClick` handlers:
@@ -931,11 +939,11 @@ Exporting an `interface` for a react.js `functional` component `onClick` handler
 The `default` exports are really handy. For instance, a library like React.js might have a default export of `React`, commonly imported under the name `React`. Each file may only have **one** default export, for example:
 
 ```ts
-  const calculateRectangle = (width: number, length: number) => {
-    return width * length;
-  }
+const calculateRectangle = (width: number, length: number) => {
+  return width * length;
+};
 
-  export default calculateRectangle
+export default calculateRectangle;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -957,12 +965,12 @@ TypeScript v^3.0
 ```
 
 ```ts
-  import { PI, calculateCircumference } from './src/circle'
-  import calculateRectangle from './src/rectangle'
+import { PI, calculateCircumference } from "./src/circle";
+import calculateRectangle from "./src/rectangle";
 
-  console.log(PI); // Prints: 3.14
-  console.log(calculateCircumference(10)); // Prints: 31.42
-  console.log(calculateRectangle(5, 10)); // Prints: 50
+console.log(PI); // Prints: 3.14
+console.log(calculateCircumference(10)); // Prints: 31.42
+console.log(calculateRectangle(5, 10)); // Prints: 50
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -981,58 +989,67 @@ This is commonly known as dynamic imports. The idea is to use the following patt
 We may use the `declare` keyword to literally declare a function. For example, to declare a require function we would use the following code:
 
 ```ts
-  declare function require(moduleName: string): any;
+declare function require(moduleName: string): any;
 ```
 
 While keeping that in mind, here are some examples as shown in the [TypeScript official documentation about modules](https://www.typescriptlang.org/docs/handbook/modules.html):
 
-***Dynamic Module Loading in Node.js:***
+**_Dynamic Module Loading in Node.js:_**
 
 ```ts
-  declare function require(moduleName: string): any;
-  
-  import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+declare function require(moduleName: string): any;
 
-  if (needZipValidation) {
-    let ZipCodeValidator: typeof Zip = require("./ZipCodeValidator");
-    let validator = new ZipCodeValidator();
-    if (validator.isAcceptable("...")) { /* ... */ }
+import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+
+if (needZipValidation) {
+  let ZipCodeValidator: typeof Zip = require("./ZipCodeValidator");
+  let validator = new ZipCodeValidator();
+  if (validator.isAcceptable("...")) {
+    /* ... */
   }
+}
 ```
 
-***Sample: Dynamic Module Loading in requirejs, pay attention to the `onLoad` argument:***
+**_Sample: Dynamic Module Loading in requirejs, pay attention to the `onLoad` argument:_**
 
 ```ts
-  declare function require(moduleNames: string[], onLoad: (...args: any[]) => void): void;
+declare function require(
+  moduleNames: string[],
+  onLoad: (...args: any[]) => void
+): void;
 
-  import * as Zip from "./ZipCodeValidator";
+import * as Zip from "./ZipCodeValidator";
 
-  if (needZipValidation) {
-    require(["./ZipCodeValidator"], (ZipCodeValidator: typeof Zip) => {
-      let validator = new ZipCodeValidator.ZipCodeValidator();
-      if (validator.isAcceptable("...")) { /* ... */ }
-    });
-  }
+if (needZipValidation) {
+  require(["./ZipCodeValidator"], (ZipCodeValidator: typeof Zip) => {
+    let validator = new ZipCodeValidator.ZipCodeValidator();
+    if (validator.isAcceptable("...")) {
+      /* ... */
+    }
+  });
+}
 ```
 
-***Sample: Dynamic Module Loading in System.js. Using the imported `System` object from the library:***
+**_Sample: Dynamic Module Loading in System.js. Using the imported `System` object from the library:_**
 
 ```ts
-  declare const System: any;
+declare const System: any;
 
-  import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
 
-  if (needZipValidation) {
-      System.import("./ZipCodeValidator").then((ZipCodeValidator: typeof Zip) => {
-          var x = new ZipCodeValidator();
-          if (x.isAcceptable("...")) { /* ... */ }
-      });
-  }
+if (needZipValidation) {
+  System.import("./ZipCodeValidator").then((ZipCodeValidator: typeof Zip) => {
+    var x = new ZipCodeValidator();
+    if (x.isAcceptable("...")) {
+      /* ... */
+    }
+  });
+}
 ```
 
 To descripe the types of libraries not written within TypeScript, basically third party libraries like `jQuery`, we need to declare the API that the library exposes (e.g. We would declare the `$` symbol for `jQuery`, to be able to access its functionalities).
 
-> We call declarations that don’t define an implementation “ambient”. ***Typically, these are defined in `.d.ts` files. If you’re familiar with C/C++, you can think of these as `.h` files***. More on this below.
+> We call declarations that don’t define an implementation “ambient”. **_Typically, these are defined in `.d.ts` files. If you’re familiar with C/C++, you can think of these as `.h` files_**. More on this below.
 
 [⬆️ Back to top](#table-of-contents)<br>
 
@@ -1049,7 +1066,7 @@ To 'code split' the program, we must divide our code into different namespaces w
 To `import` a namespace, we must make use of the TypeScript native reference tag, like so:
 
 ```ts
-  /// <reference path="./src/myNamespace.ts" />
+/// <reference path="./src/myNamespace.ts" />
 ```
 
 The triple forward dash `///` notation, **must to be included in order to help the compiler understand (think of Webpack's v^4.0 magic comments)**. The reference tags don't exist in JavaScript and will be compiled to ES5 JavaScript that can run in browsers.
@@ -1067,11 +1084,11 @@ TypeScript v^3.0
 ```
 
 ```ts
-  /// <reference path="./src/circleMath.ts" />
-  /// <reference path="./src/rectangleMath.ts" />
+/// <reference path="./src/circleMath.ts" />
+/// <reference path="./src/rectangleMath.ts" />
 
-  import Circle = MyMath.Circle;
-  import calculateRectangle = MyMath.Rectangle.calculateRectangle;
+import Circle = MyMath.Circle;
+import calculateRectangle = MyMath.Rectangle.calculateRectangle;
 ```
 
 **Note that to import a file using the `namespace` keyword we must use the triple forward dash `///` notation, as if it was a comment (think of Webpack's v^4.0 magic comments), and then use the `import` keyword to "extract" the data from the files**.
@@ -1079,26 +1096,26 @@ TypeScript v^3.0
 `circleMath.ts`
 
 ```ts
-  namespace MyMath {
-    export namespace Circle {
-      export const PI = 3.14;
-      export const calculateCircumference = (diameter: number) => {
-        return diameter * PI;
-      }
-    }
+namespace MyMath {
+  export namespace Circle {
+    export const PI = 3.14;
+    export const calculateCircumference = (diameter: number) => {
+      return diameter * PI;
+    };
   }
+}
 ```
 
 `rectangleMath.ts`
 
 ```ts
-  namespace MyMath {
-    export namespace Rectangle {
-      export const calculateRectangle = (width: number, length: number) => {
-        return width * length;
-      }
-    }
+namespace MyMath {
+  export namespace Rectangle {
+    export const calculateRectangle = (width: number, length: number) => {
+      return width * length;
+    };
   }
+}
 ```
 
 In this example, we've code splitted all our worker math-related functions into a namespace called `MyMath`. `MyMath` has also been code splitted into two different namespaces called `Circle` and `Rectangle`, which belong to the `circleMath.ts` and `rectangleMath.ts` files respectively.
@@ -1106,15 +1123,15 @@ In this example, we've code splitted all our worker math-related functions into 
 Running the following code in `app.ts` will result in:
 
 ```ts
-  /// <reference path="./src/circleMath.ts" />
-  /// <reference path="./src/rectangleMath.ts" />
+/// <reference path="./src/circleMath.ts" />
+/// <reference path="./src/rectangleMath.ts" />
 
-  import Circle = MyMath.Circle;
-  import calculateRectangle = MyMath.Rectangle.calculateRectangle;
+import Circle = MyMath.Circle;
+import calculateRectangle = MyMath.Rectangle.calculateRectangle;
 
-  console.log(Circle.PI); // Prints: 3.14
-  console.log(Circle.calculateCircumference(10)); // Prints 31.42
-  console.log(calculateRectangle(25, 25)); // Prints: 625
+console.log(Circle.PI); // Prints: 3.14
+console.log(Circle.calculateCircumference(10)); // Prints 31.42
+console.log(calculateRectangle(25, 25)); // Prints: 625
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1127,31 +1144,35 @@ Running the following code in `app.ts` will result in:
 
 Here is an example as shown in the [TypeScript official documentation about modules](https://www.typescriptlang.org/docs/handbook/modules.html):
 
-***node.d.ts (simplified excerpt)***
+**_node.d.ts (simplified excerpt)_**
 
 ```ts
-  declare module "url" {
-    export interface Url {
-      protocol?: string;
-      hostname?: string;
-      pathname?: string;
-    }
-    export function parse(urlStr: string, parseQueryString?, slashesDenoteHost?): Url;
+declare module "url" {
+  export interface Url {
+    protocol?: string;
+    hostname?: string;
+    pathname?: string;
   }
+  export function parse(
+    urlStr: string,
+    parseQueryString?,
+    slashesDenoteHost?
+  ): Url;
+}
 
-  declare module "path" {
-    export function normalize(p: string): string;
-    export function join(...paths: any[]): string;
-    export var sep: string;
-  }
+declare module "path" {
+  export function normalize(p: string): string;
+  export function join(...paths: any[]): string;
+  export var sep: string;
+}
 ```
 
 Afterwards we are able to `/// <reference>` the node.d.ts as shown in the `namespace` section, and then load the modules using `import url = require("url");` or `import * as URL from "url"` using ES6.
 
 ```ts
-  /// <reference path="node.d.ts"/>
-  import * as URL from "url";
-  let myUrl = URL.parse("http://www.typescriptlang.org");
+/// <reference path="node.d.ts"/>
+import * as URL from "url";
+let myUrl = URL.parse("http://www.typescriptlang.org");
 ```
 
 Sounds a bit complicated but it's actually really easy to import a third library.
@@ -1176,7 +1197,7 @@ TypeScript v^3.0
 ├── index.html
 ```
 
-***package.json***
+**_package.json_**
 
 ```json
   "dependencies": {
@@ -1184,33 +1205,34 @@ TypeScript v^3.0
   }
 ```
 
-***jquery.d.ts***
+**_jquery.d.ts_**
 
 ```ts
-  declare var $: any;
+declare var $: any;
 ```
 
 With jQuery declared in a `.d.ts` file, it will now be available inside the global scope thanks to the compiler.
 
-***app.ts:***
+**_app.ts:_**
 
 ```ts
-  $('button').click(function() {
-    alert('Button was clicked!');
-  });
+$("button").click(function () {
+  alert("Button was clicked!");
+});
 ```
 
-***index.html using requirejs to import the modules:***
+**_index.html using requirejs to import the modules:_**
 
 ```html
-  <!-- ...  -->
-  <button>Click me to trigger an alert with jQuery</button>
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script data-main="app.js" src="node_modules/requirejs/requirejs"></script>
-  <!-- ...  -->
+<!-- ...  -->
+<button>Click me to trigger an alert with jQuery</button>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"
+></script>
+<script data-main="app.js" src="node_modules/requirejs/requirejs"></script>
+<!-- ...  -->
 ```
 
 However, one disadvantage of this alternative is that the IDE will not have access to the jQuery `$` variable object, making it a little difficult to write code. This disadvantage is fortunately overcome using the second alternative.
@@ -1221,7 +1243,7 @@ However, one disadvantage of this alternative is that the IDE will not have acce
 
 ### Using @types/[third-party-library] NPM packages
 
-The problem with the first alternative, is that by declaring jQuery's `$` as type `any` (`declare var $: any;`), we are basically telling the compiler to *assume* that it will have access to jQuery in runtime. But that's not practical.
+The problem with the first alternative, is that by declaring jQuery's `$` as type `any` (`declare var $: any;`), we are basically telling the compiler to _assume_ that it will have access to jQuery in runtime. But that's not practical.
 
 To avoid this we can use `@types` packages. These packages basically contain type definitions for their respective JS libraries counterparts. For example, using [@types/jquery](https://www.npmjs.com/package/@types/jquery) or [`@types/react`](https://www.npmjs.com/package/@types/react) will enable the programmer to use their respective types all over the application without having to declare them. This is because both of these libraries have `.d.ts` files includes and the compiler will pick them up inside the `node_modules` library.
 
@@ -1236,7 +1258,7 @@ TypeScript v^3.0
 ├── index.html
 ```
 
-***package.json***
+**_package.json_**
 
 ```json
   "devDependencies": {
@@ -1247,25 +1269,26 @@ TypeScript v^3.0
   }
 ```
 
-***app.ts:***
+**_app.ts:_**
 
 ```ts
-  $('button').click(function() {
-    alert('Button was clicked!');
-  });
+$("button").click(function () {
+  alert("Button was clicked!");
+});
 ```
 
-***index.html using requirejs to import the modules:***
+**_index.html using requirejs to import the modules:_**
 
 ```html
-  <!-- ...  -->
-  <button>Click me to trigger an alert with jQuery</button>
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script data-main="app.js" src="node_modules/requirejs/requirejs"></script>
-  <!-- ...  -->
+<!-- ...  -->
+<button>Click me to trigger an alert with jQuery</button>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"
+></script>
+<script data-main="app.js" src="node_modules/requirejs/requirejs"></script>
+<!-- ...  -->
 ```
 
 Notice the difference? We don't need to have the declare `.d.ts` file anymore, because the compiler will pick up on the `.d.ts` files inside the `@types/jquery` library.
@@ -1276,10 +1299,10 @@ Notice the difference? We don't need to have the declare `.d.ts` file anymore, b
 
 > If you don’t want to take the time to write out declarations before using a new module, you can use a shorthand declaration to get started quickly.
 
-***declarations.d.ts***
+**_declarations.d.ts_**
 
 ```ts
-  declare module "hot-new-module";
+declare module "hot-new-module";
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1289,16 +1312,16 @@ Notice the difference? We don't need to have the declare `.d.ts` file anymore, b
 > Some module loaders such as SystemJS and AMD allow non-JavaScript content to be imported. These typically use a prefix or suffix to indicate the special loading semantics. Wildcard module declarations can be used to cover these cases.
 
 ```ts
-  declare module "*!text" {
-      const content: string;
-      export default content;
-  }
+declare module "*!text" {
+  const content: string;
+  export default content;
+}
 
-  // Some do it the other way around.
-  declare module "json!*" {
-      const value: any;
-      export default value;
-  }
+// Some do it the other way around.
+declare module "json!*" {
+  const value: any;
+  export default value;
+}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1307,11 +1330,11 @@ Notice the difference? We don't need to have the declare `.d.ts` file anymore, b
 
 > Some libraries are designed to be used in many module loaders, or with no module loading (global variables). These are known as UMD modules. These libraries can be accessed through either an import or a global variable. For example:
 
-***math-lib.d.ts***
+**_math-lib.d.ts_**
 
 ```ts
-  export function isPrime(x: number): boolean;
-  export as namespace mathLib;
+export function isPrime(x: number): boolean;
+export as namespace mathLib;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1325,15 +1348,16 @@ Notice the difference? We don't need to have the declare `.d.ts` file anymore, b
 We can think of **interfaces** as a way to assign types to the structure of a variable. This variable may be an `argument`, a `class`, an `object`, you name it, think of it as making a **contract** with the `interface`. Here's how we can define a very simple `interface` and use it on a `variable` and on a `function`:
 
 ```ts
-  interface SimplePerson {
-    firstName: string;
-  }
+interface SimplePerson {
+  firstName: string;
+}
 
-  const simplePerson: SimplePerson = { firstName: 'Robert' };
+const simplePerson: SimplePerson = { firstName: "Robert" };
 
-  const simpleGreet = (simplePerson: SimplePerson) => console.log(`Hello ${simplePerson}!`);
+const simpleGreet = (simplePerson: SimplePerson) =>
+  console.log(`Hello ${simplePerson}!`);
 
-  simpleGreet(simplePerson); // Prints: "Hello Robert!"
+simpleGreet(simplePerson); // Prints: "Hello Robert!"
 ```
 
 You might think this would make interfaces not scallable because of very restrictive properties, but fortunately **properties can be optional**. More on this below!
@@ -1345,15 +1369,15 @@ You might think this would make interfaces not scallable because of very restric
 [Very similar to the optional object properties](#optional-object-properties), to define an interface property as optional, we must place a `?` character after the key name of the property when defining it (a postfix notation). Here's an example:
 
 ```ts
-  interface SimplePerson {
-    firstName: string;
-    lastName?: string;
-    age?: number;
-  }
+interface SimplePerson {
+  firstName: string;
+  lastName?: string;
+  age?: number;
+}
 
-  // Not possible because the firstName key-value pair is missing.
-  // const wrong: SimplePerson = { lastName: 'Molina', age: 24 };
-  const right: SimplePerson = { firstName: 'Robert', age: 24 };
+// Not possible because the firstName key-value pair is missing.
+// const wrong: SimplePerson = { lastName: 'Molina', age: 24 };
+const right: SimplePerson = { firstName: "Robert", age: 24 };
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1362,30 +1386,30 @@ You might think this would make interfaces not scallable because of very restric
 
 ### Index Signatures (Dynamic Property Names)
 
-We may also define the interface with *index signatures*, think of them like dynamic key-value pairs. Here's an example:
+We may also define the interface with _index signatures_, think of them like dynamic key-value pairs. Here's an example:
 
 ```ts
-  interface NamedPerson {
-    firstName: string;
-    age?: number;
-    [propName: string]: any;
-  }
+interface NamedPerson {
+  firstName: string;
+  age?: number;
+  [propName: string]: any;
+}
 
-  const person: NamedPerson = {
-    firstName: 'Robert',
-    lastName: 'Molina',
-    age: 24,
-    hobbies: ['Programming', 'Cooking'],
-    greet(lastName: string) {
-      console.log(`Hi, I am ${this.firstName} ${lastName}!`);
-    }
-  }
+const person: NamedPerson = {
+  firstName: "Robert",
+  lastName: "Molina",
+  age: 24,
+  hobbies: ["Programming", "Cooking"],
+  greet(lastName: string) {
+    console.log(`Hi, I am ${this.firstName} ${lastName}!`);
+  },
+};
 ```
 
 Notice how we can add very different properties now? This is a way of telling the compiler the following when declaring and defining `person`:
 
-1. `person` **must** have a *`firstName`* property of type `string`.
-2. `person` **may** have an *`age`* property. It **must** be of type `number` if it exists, anything else will result in an error when compiling.
+1. `person` **must** have a _`firstName`_ property of type `string`.
+2. `person` **may** have an _`age`_ property. It **must** be of type `number` if it exists, anything else will result in an error when compiling.
 3. `person` **may** then have any number of properties of type `string`, each with a value of type `any`, all made possible by the **index signature** of: `[propName: string]: any;`.
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1400,25 +1424,25 @@ Here are two more advanced examples, we can use an `interface` to define the sub
 
 <a id="implementing-interface-to-class"></a>
 
-#### *1.* Implementing an `interface` to a `Class`
+#### _1._ Implementing an `interface` to a `Class`
 
 ```ts
-  interface NamedPerson {
-    firstName: string;
-    age?: number;
-    [propName: string]: any;
-    greet(lastName: string): void;
-  }
+interface NamedPerson {
+  firstName: string;
+  age?: number;
+  [propName: string]: any;
+  greet(lastName: string): void;
+}
 
-  class Person implements NamedPerson {
-    constructor(public firstName: string, public lastName: string) {}
-    greet(lastName: string) {
-      console.log(`Hi, I am ${this.firstName} ${lastName}!`);
-    }
+class Person implements NamedPerson {
+  constructor(public firstName: string, public lastName: string) {}
+  greet(lastName: string) {
+    console.log(`Hi, I am ${this.firstName} ${lastName}!`);
   }
+}
 
-  const myPerson = new Person('Robert', 'Molina');
-  greet(myPerson); // Prints: "Hi, I am Robert Moina"
+const myPerson = new Person("Robert", "Molina");
+greet(myPerson); // Prints: "Hi, I am Robert Moina"
 ```
 
 > Interfaces describe the **`public` side of the class**, rather than both the `public` and `private` side. This prohibits you from using them to check that a class also has particular types for the private side of the class instance.
@@ -1428,40 +1452,40 @@ Here are two more advanced examples, we can use an `interface` to define the sub
 Here is an example as shown in the [TypeScript official documentation about interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html):
 
 ```ts
-  class Control {
-      private state: any;
-  }
+class Control {
+  private state: any;
+}
 
-  interface SelectableControl extends Control {
-      select(): void;
-  }
+interface SelectableControl extends Control {
+  select(): void;
+}
 
-  class Button extends Control implements SelectableControl {
-      select() { }
-  }
+class Button extends Control implements SelectableControl {
+  select() {}
+}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
 
 <a id="implementing-interface-to-function"></a>
 
-#### *2.* Implementing an `interface` to a `function`
+#### _2._ Implementing an `interface` to a `function`
 
 > As we mentioned earlier, interfaces can describe the rich types present in real world JavaScript. Because of JavaScript’s dynamic and flexible nature, you may occasionally encounter an object that works as a combination of some of the types described above.
 
 One such example is an object that acts as both a function and an object, with additional properties:
 
 ```ts
-  interface DoubleValueFunc {
-    (number1: number, number2: number): number;
-  }
+interface DoubleValueFunc {
+  (number1: number, number2: number): number;
+}
 
-  let myDoubleFunction: DoubleValueFunc;
-  myDoubleFunction = (num1: number, num2: number) => {
-    return (num1 + num2) * 2;
-  }
+let myDoubleFunction: DoubleValueFunc;
+myDoubleFunction = (num1: number, num2: number) => {
+  return (num1 + num2) * 2;
+};
 
-  console.log(myDoubleFunction(10,50)); // Prints: 120
+console.log(myDoubleFunction(10, 50)); // Prints: 120
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1471,44 +1495,44 @@ One such example is an object that acts as both a function and an object, with a
 Similar to how a `class` can extend its properties by inheriting another `class` or `abstract class` properties, **interfaces may also inherit properties to extend its own properties**. Here's a simple example similar to the one as shown in the [TypeScript official documentation about extending interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html):
 
 ```ts
-  interface Shape {
-    color: string;
-  }
+interface Shape {
+  color: string;
+}
 
-  interface Square extends Shape {
-    sideLength: number;
-  }
+interface Square extends Shape {
+  sideLength: number;
+}
 
-  const square: Square = {
-    color: "blue",
-    sideLength: 10
-  };
+const square: Square = {
+  color: "blue",
+  sideLength: 10,
+};
 ```
 
 By extending an interface, we are essentially mixing the "old" interface into a new interface, with newly added properties. To quote the official documentation:
 
 > This allows us to copy the members of one interface into another, which gives you more flexibility in how you separate your interfaces into reusable components.
 
-It is also possible to combine any number of interfaces into one, this a concept known as **composition** in programming, and it is possible to *compose* multiple interfaces into one, we will use this to serve as an example of *composition* **by extending multiple interfaces into a single interface**. Here's another example similar to the one as shown in the [TypeScript official documentation about extending interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html):
+It is also possible to combine any number of interfaces into one, this a concept known as **composition** in programming, and it is possible to _compose_ multiple interfaces into one, we will use this to serve as an example of _composition_ **by extending multiple interfaces into a single interface**. Here's another example similar to the one as shown in the [TypeScript official documentation about extending interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html):
 
 ```ts
-  interface Shape {
-    color: string;
-  }
+interface Shape {
+  color: string;
+}
 
-  interface PenStroke {
-    penWidth: number;
-  }
+interface PenStroke {
+  penWidth: number;
+}
 
-  interface Square extends Shape, PenStroke {
-    sideLength: number;
-  }
+interface Square extends Shape, PenStroke {
+  sideLength: number;
+}
 
-  const square: Square = {
-    color: "magenta",
-    penWidth: 2.5,
-    sideLength: 0.5
-  }
+const square: Square = {
+  color: "magenta",
+  penWidth: 2.5,
+  sideLength: 0.5,
+};
 ```
 
 Notice, how both `Shape` and `PenStroke` were mixed to create `Square` while also declaring an additional property named `sideLength`. Bear in mind that **all** of the extended interfaces must be **structurally compatible** or else the compiler will throw an error. As a final note, we can also omit (by either picking or excluding) properties, more on this directly below.
@@ -1522,7 +1546,7 @@ Notice, how both `Shape` and `PenStroke` were mixed to create `Square` while als
 Sometimes, we might want to omit certain types from an extended interface. One of the most common reasons is to **overwrite** a property. Let's first define the `Omit` special type that we will be using to exclude properties, and then we'll do a scenario exercise:
 
 ```ts
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 ```
 
 The angle brackets and the content inside them are part of what is known as `Generics`. They are a way to declare, basically, generic typing similarly to how an array of strings may be declared as `string[]`. More information about Generics on its section down below after the Interfaces!
@@ -1533,13 +1557,13 @@ Here's a breakdown of how the `Omit` type works. It's essentially doing the oppo
 // From T pick a set of properties K
 declare function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K>;
 
-const nameAndAgeOnly = pick(person, "name", "age");  // { name: string, age: number }
+const nameAndAgeOnly = pick(person, "name", "age"); // { name: string, age: number }
 ```
 
 In TypeScript 2.8, the `Exclude` type was added to the standard library, which allows an omission type to be written as shown directly below:
 
 ```ts
-type T00 = Exclude<"a" | "b" | "c" | "d", "a" | "c" | "f">;  // "b" | "d"
+type T00 = Exclude<"a" | "b" | "c" | "d", "a" | "c" | "f">; // "b" | "d"
 ```
 
 You can read the above as "exclude `"a"`, `"c"`, and `"f"` from `("a" | "b" | "c" | "d")`, which results in `"b"` or `"d"`.
@@ -1564,12 +1588,16 @@ type value = string | number | string[];
 /**
  * Base interface.
  */
-type InputElementAttributes = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type InputElementAttributes = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
-interface IInputProps extends IInputState, Omit<InputElementAttributes, 'onChange'> {
-  onChange: (value?: value) => void
+interface IInputProps
+  extends IInputState,
+    Omit<InputElementAttributes, "onChange"> {
+  onChange: (value?: value) => void;
 }
-
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1586,13 +1614,13 @@ interface IInputProps extends IInputState, Omit<InputElementAttributes, 'onChang
 
 ```ts
 function isFish(pet: Fish | Bird): pet is Fish {
-    return (<Fish>pet).swim !== undefined;
+  return (<Fish>pet).swim !== undefined;
 }
 ```
 
 Let's go back to our React scenario. Let's say our input values are programmatically managed, and could either be of type `value`, or objects with an `IValue` interface depening on some props and prior setup.
 
-Let's assume we have an `onChangeHandler` that listens for any changes made to the input value and returns a data of ***type* value**. But the problem is that the **value *variable*** might not always be of ***type* value**, so we need to check if it's an object of **"type" IValue**. Let's define the typings and `onChangeHandler`:
+Let's assume we have an `onChangeHandler` that listens for any changes made to the input value and returns a data of **_type_ value**. But the problem is that the **value _variable_** might not always be of **_type_ value**, so we need to check if it's an object of **"type" IValue**. Let's define the typings and `onChangeHandler`:
 
 ```ts
 type value = string | number | string[];
@@ -1607,10 +1635,10 @@ interface IValue {
  */
 const instanceOfIValue = (object: any): object is ISelectValue => {
   if (object && object.inputData) {
-    return 'inputData' in object; // true
+    return "inputData" in object; // true
   }
   return false;
-}
+};
 
 const onChangeHandler = (inputData: value | IValue): value => {
   // Checking for IValue object.
@@ -1619,7 +1647,7 @@ const onChangeHandler = (inputData: value | IValue): value => {
   }
   // Otherwise, simply return the inputData which will be of type value.
   return inputData;
-}
+};
 ```
 
 The above code snippet might seem overkill, but keep in mind that `instanceOfIValue` can be used in multiple places, and it's scallable to a certain extent. Further properties might be added, and guarded for. If there are too many properties to guard though, using **distriminators** to check for instances might be better.
@@ -1634,7 +1662,7 @@ type value = string | number | string[];
 interface IValue {
   value?: value;
   displayValue: string;
-  discriminator: 'IValue';
+  discriminator: "IValue";
   [propName: string]: any;
 }
 
@@ -1643,10 +1671,10 @@ interface IValue {
  */
 const instanceOfIValue = (object: any): object is ISelectValue => {
   if (object && object.discriminator) {
-    return object.discriminator === 'IValue';
+    return object.discriminator === "IValue";
   }
   return false;
-}
+};
 
 const onChangeHandler = (inputData: value | IValue): value => {
   // Checking for IValue object.
@@ -1655,7 +1683,7 @@ const onChangeHandler = (inputData: value | IValue): value => {
   }
   // Otherwise, simply return the inputData which will be of type value.
   return inputData;
-}
+};
 ```
 
 By using a **discriminator**, we don't have to check if the `value` or `displayValue` properties exist, instead we check for a `discriminator` property which will let us know if the object is of "type" `IValue`.
@@ -1672,9 +1700,9 @@ By using a **discriminator**, we don't have to check if the `value` or `displayV
 Generics are a way to help us write dynamic, flexible code. To explain what generics are, let's take a look at the example below:
 
 ```ts
-  function echo(data: string) {
-    return data;
-  }
+function echo(data: string) {
+  return data;
+}
 ```
 
 That is **not** a generic function. Generics are reusable components (be it a `function`, an `object`, a `class`) that can be used multiple times for multiple variable types, like a `string`, a `number`, `boolean`, etc. Next we'll see how to properly write Generics in TypeScript and different types of Generics.
@@ -1686,13 +1714,13 @@ That is **not** a generic function. Generics are reusable components (be it a `f
 To write a generic, let's take the example above and turn it into a simple generic function. Here's how the original `echo` function would be rewritten into a simple generic:
 
 ```ts
-  function echo(data: any) {
-    return data;
-  }
+function echo(data: any) {
+  return data;
+}
 
-  console.log(echo('Robert')); // Prints: "Robert"
-  console.log(echo(24).length); // Prints: undefined.
-  console.log(echo({ name: 'Robert', age: 24 })); // Prints: { name: "Robert", age: 24 }
+console.log(echo("Robert")); // Prints: "Robert"
+console.log(echo(24).length); // Prints: undefined.
+console.log(echo({ name: "Robert", age: 24 })); // Prints: { name: "Robert", age: 24 }
 ```
 
 Our function is now a generic function, it can accept `any` type of argument and returns a value of equal type. But this function is not really practical for two reasons:
@@ -1709,21 +1737,21 @@ Note how in the example above, we can't access the `length` property of a string
 While the example above is technically a generic function, let's now improve it by making use of TypeScript so that we can know what type will be returned from `echo`. Here is an example:
 
 ```ts
-  function betterEcho<T>(data: T) {
-    return data;
-  }
+function betterEcho<T>(data: T) {
+  return data;
+}
 ```
 
 > We’ve now added a type variable `T` to the function. This `T` allows us to capture the type the user provides (e.g. `number`), so that we can use that information later. Here, we use `T` again as the return type.
 
-By using the angle brackets right beside `betterEcho`, it's a way of saying to the compiler and the IDE the following: *"hey, `betterEcho` must return a value **type** equal to the **type** of the `data` argument"*. Here is an example of using `betterEcho` and how the compiler would behave:
+By using the angle brackets right beside `betterEcho`, it's a way of saying to the compiler and the IDE the following: _"hey, `betterEcho` must return a value **type** equal to the **type** of the `data` argument"_. Here is an example of using `betterEcho` and how the compiler would behave:
 
 ```ts
-  // Now I get types in the IDE, the compiler also knows what type is returned from betterEcho.
-  console.log(betterEcho('Robert').length);
+// Now I get types in the IDE, the compiler also knows what type is returned from betterEcho.
+console.log(betterEcho("Robert").length);
 // console.log(betterEcho(24).length); // Compiler & IDE warning: Property 'length' does not exist on type `number`.
-  console.log(betterEcho<number>(24).toExponential(2)); // I would get IDE support.
-  console.log(betterEcho({ name: 'Robert', age: 24 }).age); // I would also get IDE support.
+console.log(betterEcho<number>(24).toExponential(2)); // I would get IDE support.
+console.log(betterEcho({ name: "Robert", age: 24 }).age); // I would also get IDE support.
 ```
 
 This way both the compiler **and** the IDE will know what type will be returned from `betterEcho`. **The compiler won't even run if `noEmitOnError` is true inside the `tsconfig.json` file. [More info about this here](https://www.typescriptlang.org/docs/handbook/compiler-options.html).**
@@ -1732,21 +1760,21 @@ This way both the compiler **and** the IDE will know what type will be returned 
 
 ### Built-in Generics
 
-Some types though, have *built-in generics*. I've even used some as examples before without having touched yet on generics. Here are some very simple examples:
+Some types though, have _built-in generics_. I've even used some as examples before without having touched yet on generics. Here are some very simple examples:
 
 ```ts
-  const testResults: Array<number> = [1.94, 2.33];
-  testResults.push(-2.99);
-  // testResults.push('string'); // Not possible.
+const testResults: Array<number> = [1.94, 2.33];
+testResults.push(-2.99);
+// testResults.push('string'); // Not possible.
 
-  // Arrays
-  function printAll<T>(args: T[]) {
-    args.forEach(element => console.log(element));
-  }
+// Arrays
+function printAll<T>(args: T[]) {
+  args.forEach((element) => console.log(element));
+}
 
-  printAll<string>(['Apple', 'Banana']);
-  printAll<number>([1, 3, 5]);
-  // printAll<number>([1, 'string', 5]); // Not possible.
+printAll<string>(["Apple", "Banana"]);
+printAll<number>([1, 3, 5]);
+// printAll<number>([1, 'string', 5]); // Not possible.
 ```
 
 Arrays have built-in generics. The constant `testResults` is an array that will accept any value that is of type `number`. The function `printAll` will also accept any `array` of `T` type as an argument, turning `printAll` into a generic function.
@@ -1760,15 +1788,15 @@ The `Generic Types` are **exactly** what the name says. It's a way of declaring 
 **Functions:**
 
 ```ts
-  function betterEcho<T>(data: T) {
-    return data;
-  }
+function betterEcho<T>(data: T) {
+  return data;
+}
 
-  const echoStr: <T>(data: T) => T = betterEcho;
-  console.log(echoStr<string>('Hello world!').toLocaleUpperCase()); // Prints: "HELLO WORLD!"
+const echoStr: <T>(data: T) => T = betterEcho;
+console.log(echoStr<string>("Hello world!").toLocaleUpperCase()); // Prints: "HELLO WORLD!"
 
-  const echoNum: <T>(data: T) => T = betterEcho;
-  console.log(echoNum<number>(312).toString()); // Prints: "312"
+const echoNum: <T>(data: T) => T = betterEcho;
+console.log(echoNum<number>(312).toString()); // Prints: "312"
 ```
 
 > The type of generic functions is just like those of non-generic functions, with the type parameters listed first, similarly to function declarations.
@@ -1778,15 +1806,15 @@ The `Generic Types` are **exactly** what the name says. It's a way of declaring 
 Here is an example as shown in the [TypeScript official documentation about generic types](https://www.typescriptlang.org/docs/handbook/generics.html):
 
 ```ts
-  interface GenericIdentityFn<T> {
-      (arg: T): T;
-  }
+interface GenericIdentityFn<T> {
+  (arg: T): T;
+}
 
-  function identity<T>(arg: T): T {
-      return arg;
-  }
+function identity<T>(arg: T): T {
+  return arg;
+}
 
-  let myIdentity: GenericIdentityFn<number> = identity;
+let myIdentity: GenericIdentityFn<number> = identity;
 ```
 
 > Notice that our example has changed to be something slightly different. Instead of describing a generic function, we now have a non-generic function signature that is a part of a generic type. When we use `GenericIdentityFn`, we now will also need to specify the corresponding type argument (here: number), effectively locking in what the underlying call signature will use. Understanding when to put the type parameter directly on the call signature and when to put it on the interface itself will be helpful in describing what aspects of a type are generic.
@@ -1800,22 +1828,22 @@ Here is an example as shown in the [TypeScript official documentation about gene
 Here is a simple example for starters using **`constraints`**. The generic types may be constrained by **extending** them to certain types. For example, we may **constrain** (with the `extends` keyword) a type `T` to type `number`, or type `string` **only**. Here is an example:
 
 ```ts
-  class GenericMath<T extends number | string> {
-    constructor(public baseValue: T, public multiplyValue: T) {}
-    calculate(): number {
-      return +this.baseValue * +this.multiplyValue
-    }
+class GenericMath<T extends number | string> {
+  constructor(public baseValue: T, public multiplyValue: T) {}
+  calculate(): number {
+    return +this.baseValue * +this.multiplyValue;
   }
+}
 
-  // const genericMath = new GenericMath<number>(10, 'string'); // Not possible because 'string' can't be converted to a number.
-  // const genericMathBoolean = new GenericMath<boolean>(10, '20'); // Not possible because T only extends to number and string only.
-  const onlyNumbers = new GenericMath<number>(10, 20);
-  const onlyStrings = new GenericMath<string>('10', '20');
-  const bothTypes = new GenericMath<number | string>(10, '20');
+// const genericMath = new GenericMath<number>(10, 'string'); // Not possible because 'string' can't be converted to a number.
+// const genericMathBoolean = new GenericMath<boolean>(10, '20'); // Not possible because T only extends to number and string only.
+const onlyNumbers = new GenericMath<number>(10, 20);
+const onlyStrings = new GenericMath<string>("10", "20");
+const bothTypes = new GenericMath<number | string>(10, "20");
 
-  console.log(onlyNumbers.calculate()); // Prints: 200
-  console.log(onlyStrings.calculate()); // Prints: 200
-  console.log(bothTypes.calculate()); // Prints: 200
+console.log(onlyNumbers.calculate()); // Prints: 200
+console.log(onlyStrings.calculate()); // Prints: 200
+console.log(bothTypes.calculate()); // Prints: 200
 ```
 
 Notice how the `T` type is defined. **`T` extends to the `number` type, `or` to the `string` type only**. This means that everything referring to `T` inside the generic class `GenericMath`, can be of type `number` or type `string` (e.g. the constructor arguments), depending on how its set when calling the constructor.
@@ -1823,16 +1851,19 @@ Notice how the `T` type is defined. **`T` extends to the `number` type, `or` to 
 Here is a more advanced example where we use **multiple types** when defining the generic class types:
 
 ```ts
-  class MultipleTypesMath<T extends number, U extends number | string> {
-    constructor(public baseValue: T, public multiplyValue: U) {}
-    calculate(): number {
-      return +this.baseValue * +this.multiplyValue;
-    }
+class MultipleTypesMath<T extends number, U extends number | string> {
+  constructor(public baseValue: T, public multiplyValue: U) {}
+  calculate(): number {
+    return +this.baseValue * +this.multiplyValue;
   }
+}
 
-  const multipleTypesMath = new MultipleTypesMath<number, number | string>(5, '20');
+const multipleTypesMath = new MultipleTypesMath<number, number | string>(
+  5,
+  "20"
+);
 
-  console.log(multipleTypesMath.calculate()); // Prints: 100
+console.log(multipleTypesMath.calculate()); // Prints: 100
 ```
 
 Now we have **two** types, `T` and `U` and both are constrained, but to different types. The constructor argument `baseValue` is defined as type `T`, and `T` only extends to type `number`, which results in `baseValue` only accepting values of type `number` when calling the constructor.
@@ -1853,20 +1884,20 @@ Before getting into what decorators are, here is some important information take
 > **NOTE:  Decorators are an experimental feature that may change in future releases.**
 > To enable experimental support for decorators, you must enable the `experimentalDecorators` compiler option either on the command line or in your `tsconfig.json`:
 
-***Command Line:***
+**_Command Line:_**
 
 ```cli
 tsc --target ES5 --experimentalDecorators
 ```
 
-***tsconfig.json:***
+**_tsconfig.json:_**
 
 ```json
 {
-    "compilerOptions": {
-        "target": "ES5",
-        "experimentalDecorators": true
-    }
+  "compilerOptions": {
+    "target": "ES5",
+    "experimentalDecorators": true
+  }
 }
 ```
 
@@ -1885,16 +1916,16 @@ tsc --target ES5 --experimentalDecorators
 Another way to explain a decorator would be to say that they are a way to enhance the functionality of a `class`. We can use decorators to add properties to a decorated class when its constructor is executed, for example. This is of course among many other things that are possible, more of this below.
 
 ```ts
-  function logged(constructorFn: Function) {
-    console.log(constructorFn); // Will log the class Person constructor.
-  }
+function logged(constructorFn: Function) {
+  console.log(constructorFn); // Will log the class Person constructor.
+}
 
-  @logged
-  class Person {
-    constructor() {
-      console.log('Hi!');
-    }
+@logged
+class Person {
+  constructor() {
+    console.log("Hi!");
   }
+}
 ```
 
 Every time a new instance of `Person` is built, the **constructor function** will be logged into the console.
@@ -1908,19 +1939,17 @@ Every time a new instance of `Person` is built, the **constructor function** wil
 In other words, a factory is a functions that returns a decorator.
 
 ```ts
-  function logged(constructorFn: Function) {
-    console.log(constructorFn); // Will log the class Person constructor.
-  }
+function logged(constructorFn: Function) {
+  console.log(constructorFn); // Will log the class Person constructor.
+}
 
-  // Factory
-  function logging(value: boolean) {
-    return value ? logged : () => {};
-  }
+// Factory
+function logging(value: boolean) {
+  return value ? logged : () => {};
+}
 
-  @logging(true) // If true, it will return the `logged` decorator, if false, it will execute an empty function.
-  class Car {
-
-  }
+@logging(true) // If true, it will return the `logged` decorator, if false, it will execute an empty function.
+class Car {}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1930,22 +1959,22 @@ In other words, a factory is a functions that returns a decorator.
 Since decorators have access to a class constructor function, through the decorators we can access the class `prototype` and add properties to said class. In the example below we will add the `print` method to any `class` decorated by `printable` (to `Plant` in this case). Also notice in the next example how the argument passed to `logging` (same `factory` function as above) is `false`. This means the constructor won't be printed to the console through the `logged` decorator **(because the `factory` won't return it)**.
 
 ```ts
-  function printable(constructorFn: Function) {
-    constructorFn.prototype.print = function() {
-      console.log(this);
-      this.name = 'Red Plant'
-    }
-  }
+function printable(constructorFn: Function) {
+  constructorFn.prototype.print = function () {
+    console.log(this);
+    this.name = "Red Plant";
+  };
+}
 
-  @logging(false)
-  @printable
-  class Plant {
-    private name = 'Green Plant';
-  }
+@logging(false)
+@printable
+class Plant {
+  private name = "Green Plant";
+}
 
-  const plant = new Plant();
-  (<any>plant).print(); // Would print the constructed Plant object: { name: "Green Plant" }, then change the name property.
-  console.log('After print() is executed', plant); // Prints: the constructed Plant object: { name: "Red Plant" }.
+const plant = new Plant();
+(<any>plant).print(); // Would print the constructed Plant object: { name: "Green Plant" }, then change the name property.
+console.log("After print() is executed", plant); // Prints: the constructed Plant object: { name: "Red Plant" }.
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -1957,29 +1986,33 @@ Since decorators have access to a class constructor function, through the decora
 Besides adding a decorator to the class, we can also add decorators to a class member method (and properties, parameters - more on this below). It is done in the exact same way.
 
 ```ts
-  function editable(value: boolean) {
-    return function(target:any, propName: string, descriptor: PropertyDescriptor = {}) {
-      descriptor.writable = value;
-      Object.defineProperty(target, propName, descriptor);
-    }
-  }
-  
-  class Project {
-    constructor(name: string) {
-      this.projectName = name;
-    }
+function editable(value: boolean) {
+  return function (
+    target: any,
+    propName: string,
+    descriptor: PropertyDescriptor = {}
+  ) {
+    descriptor.writable = value;
+    Object.defineProperty(target, propName, descriptor);
+  };
+}
 
-    @editable(false)
-    calcBudget() {
-      console.log(1000);
-    }
+class Project {
+  constructor(name: string) {
+    this.projectName = name;
   }
-  
-  const project = new Project('Super Project');
-  project.calcBudget(); // Prints: 1000
-  // project.calcBudget = () => { // Throws warning in the console IF editable is false. Property won't ever be changed.
-  //   console.log(2000);
-  // };
+
+  @editable(false)
+  calcBudget() {
+    console.log(1000);
+  }
+}
+
+const project = new Project("Super Project");
+project.calcBudget(); // Prints: 1000
+// project.calcBudget = () => { // Throws warning in the console IF editable is false. Property won't ever be changed.
+//   console.log(2000);
+// };
 ```
 
 In the above example, we are modifying the `calcBudget` object's writable property to avoid it from being changed in the future. If changed then a warning will be thrown in the console. [More information about PropertyDescriptors can be found here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
@@ -1999,48 +2032,54 @@ The expression for the property decorator will be called as a function at runtim
 
 > **NOTE  A Property Descriptor is not provided as an argument to a property decorator due to how property decorators are initialized in TypeScript. This is because there is currently no mechanism to describe an instance property when defining members of a prototype, and no way to observe or modify the initializer for a property. The return value is ignored too. As such, a property decorator can only be used to observe that a property of a specific name has been declared for a class.**
 
-**That is not to say that a property's PropertyDescriptor object cannot  be modified.** We may define a new object descriptor and return it, here's an example of how to make a property with `writable` false:
+**That is not to say that a property's PropertyDescriptor object cannot be modified.** We may define a new object descriptor and return it, here's an example of how to make a property with `writable` false:
 
 ```ts
-  // Method Decorator
-  function editable(value: boolean) {
-    return function(target:any, propName: string, descriptor: PropertyDescriptor = {}) {
-      descriptor.writable = value;
-      Object.defineProperty(target, propName, descriptor);
-    }
-  }
-
-  // Property Decorator
-  function overwritable(value: boolean): any {
-    return function(target: any, propName: string): any {
-      const newDescriptor: PropertyDescriptor = { // New PropertyDescriptor object.
-        writable: value
-      };
-      return newDescriptor;
-    }
-  }
-
-  class Project {
-    @overwritable(false)
-    private projectName: string;
-
-    constructor(name: string) {
-      this.projectName = name;
-    }
-
-    @editable(true)
-    calcBudget() {
-      console.log(1000);
-    }
-  }
-  
-  const project = new Project('Super Project'); // The name won't be modified because the @overwritable decorator's argument is false.
-  project.calcBudget(); // Prints: 1000
-  project.calcBudget = () => { // Throws error in console IF the @editable decorator's argument is false, cannot assign new property to this.
-    console.log(2000);
+// Method Decorator
+function editable(value: boolean) {
+  return function (
+    target: any,
+    propName: string,
+    descriptor: PropertyDescriptor = {}
+  ) {
+    descriptor.writable = value;
+    Object.defineProperty(target, propName, descriptor);
   };
-  project.calcBudget(); // Prints: 2000
-  console.log(project) // IF overwritable is false, then projectName will be equal to undefined.
+}
+
+// Property Decorator
+function overwritable(value: boolean): any {
+  return function (target: any, propName: string): any {
+    const newDescriptor: PropertyDescriptor = {
+      // New PropertyDescriptor object.
+      writable: value,
+    };
+    return newDescriptor;
+  };
+}
+
+class Project {
+  @overwritable(false)
+  private projectName: string;
+
+  constructor(name: string) {
+    this.projectName = name;
+  }
+
+  @editable(true)
+  calcBudget() {
+    console.log(1000);
+  }
+}
+
+const project = new Project("Super Project"); // The name won't be modified because the @overwritable decorator's argument is false.
+project.calcBudget(); // Prints: 1000
+project.calcBudget = () => {
+  // Throws error in console IF the @editable decorator's argument is false, cannot assign new property to this.
+  console.log(2000);
+};
+project.calcBudget(); // Prints: 2000
+console.log(project); // IF overwritable is false, then projectName will be equal to undefined.
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2063,33 +2102,32 @@ Either the constructor function of the class for a static member, or the prototy
 Here is an example of how we can put that into practice:
 
 ```ts
-  function printInfo(target: any, methodName: string, paramIndex: number) {
-    console.log('Target: ', target);
-    console.log('Method name: ', methodName);
-    console.log('Param index: ', paramIndex);
+function printInfo(target: any, methodName: string, paramIndex: number) {
+  console.log("Target: ", target);
+  console.log("Method name: ", methodName);
+  console.log("Param index: ", paramIndex);
+}
+
+class Course {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
   }
 
-  class Course {
-    name: string;
-
-    constructor(name: string) {
-      this.name = name;
-    }
-
-    // @printInfo behind printAll
-    printStudentNumbers(mode: string, @printInfo printAll: boolean) {
-      if (printAll) {
-        console.log(10000);
-      } else {
-        console.log(2000);
-      }
+  // @printInfo behind printAll
+  printStudentNumbers(mode: string, @printInfo printAll: boolean) {
+    if (printAll) {
+      console.log(10000);
+    } else {
+      console.log(2000);
     }
   }
+}
 
-  const course = new Course('TypeScript');
-  course.printStudentNumbers('anything', true);
-  course.printStudentNumbers('anything', false);
-
+const course = new Course("TypeScript");
+course.printStudentNumbers("anything", true);
+course.printStudentNumbers("anything", false);
 ```
 
 So, `@printInfo` will only be called at runtime whenever `printStudentNumbers` is executed. Here is what `@printInfo` would print for both instances:
@@ -2136,24 +2174,22 @@ This will make sure the compiler can parse TypeScript down to ES5.
 3. Webpack `webpack.config.js` file configuration to handle TypeScript:
 
 ```js
-  const path = require('path');
+const path = require("path");
 
-  module.exports = {
-    entry:"./src/app.ts",
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    },
-    devtool:"source-map",
-    resolve: {
-      extensions: ["*",".ts",".tsx",".js"]
-    },
-    module:{
-      rules: [
-        { test:/\.tsx?$/, loader:"ts-loader" }
-      ]
-    }
-  };
+module.exports = {
+  entry: "./src/app.ts",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  devtool: "source-map",
+  resolve: {
+    extensions: ["*", ".ts", ".tsx", ".js"],
+  },
+  module: {
+    rules: [{ test: /\.tsx?$/, loader: "ts-loader" }],
+  },
+};
 ```
 
 > This will direct webpack to enter through ./index.ts, load all .ts and .tsx files through the ts-loader, and output a bundle.js file in our current directory.
@@ -2180,67 +2216,74 @@ This will now also create the react app with all the configuration already set u
 
 When using an interface to declare the PropTypes, by convention we must write a capital I when defining an interface. Let's see an example about how we can use PropTypes together with interfaces, enums, and how to apply them:
 
-***App.tsx***
+**_App.tsx_**
 
 ```tsx
-  // ...
+// ...
 
-  interface IAppProps {[propName]: any}
-  interface IAppState {
-    counterValue: number;
-  }
+interface IAppProps {
+  [propName]: any;
+}
+interface IAppState {
+  counterValue: number;
+}
 
-  class App extends React.Component<IAppProps, IAppState> {
-    public state = { counterValue: 0 }; // State is required to be public.
+class App extends React.Component<IAppProps, IAppState> {
+  public state = { counterValue: 0 }; // State is required to be public.
 
-    public render() {
-      return (
-        <div>
-          <p>
-            <CounterOutput
-              counter={this.state.counterValue}
-              onClick={this.counterHandler} />
-          </p>
-        </div>
-      );
-    }
-
-    private counterHandler = (mode: ECounterHandlers) => {
-      this.setState(prevState => {
-        switch(mode) {
-          case ECounterHandlers.Dec:
-            return { counterValue: prevState.counterValue - 1 }
-          case ECounterHandlers.Inc:
-            return { counterValue: prevState.counterValue + 1 }
-        }
-      });
-    }
-  }
-
-  export default App;
-```
-
-***CounterOutput.tsx***
-
-```tsx
-  export enum ECounterHandlers {
-    Inc,
-    Dec
-  }
-
-  interface ICounterOutputProps {
-    counter: number;
-    onClick: (mode: ECounterHandlers) => void;
-  }
-  const counterOutput = (props: ICounterOutputProps) => {
+  public render() {
     return (
       <div>
-        <p>{props.counter}</p>
-        <button onClick={() => props.onClick(ECounterHandlers.Dec)}>Decrement</button>
-        <button onClick={() => props.onClick(ECounterHandlers.Inc)}>Increment</button>
+        <p>
+          <CounterOutput
+            counter={this.state.counterValue}
+            onClick={this.counterHandler}
+          />
+        </p>
       </div>
     );
   }
+
+  private counterHandler = (mode: ECounterHandlers) => {
+    this.setState((prevState) => {
+      switch (mode) {
+        case ECounterHandlers.Dec:
+          return { counterValue: prevState.counterValue - 1 };
+        case ECounterHandlers.Inc:
+          return { counterValue: prevState.counterValue + 1 };
+      }
+    });
+  };
+}
+
+export default App;
+```
+
+**_CounterOutput.tsx_**
+
+```tsx
+export enum ECounterHandlers {
+  Inc,
+  Dec,
+}
+
+interface ICounterOutputProps {
+  counter: number;
+  onClick: (mode: ECounterHandlers) => void;
+}
+const counterOutput = (props: ICounterOutputProps) => {
+  return (
+    <div>
+      <p>{props.counter}</p>
+      <button onClick={() => props.onClick(ECounterHandlers.Dec)}>
+        Decrement
+      </button>
+      <button onClick={() => props.onClick(ECounterHandlers.Inc)}>
+        Increment
+      </button>
+    </div>
+  );
+};
 ```
 
 Notice the following:
@@ -2252,19 +2295,19 @@ Notice the following:
 It is also possible to modify the `tsconfig.json` or the `tslint.json` to handle highlights in your IDE:
 
 ```json
-  {
-    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
-    "linterOptions": {
-      "exclude": [
-        "config/**/*.js",
-        "node_modules/**/*.ts",
-        "coverage/lcov-report/*.js"
-      ]
-    },
-    "rules": {
-      "jsx-no-lambda": false
-    }
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "jsx-no-lambda": false
   }
+}
 ```
 
 TypeScript by default doesn't like when lambda functions are used and the IDE will hightlight them as an error. To disable this, add the following rule into your `tslint.json` file: `"jsx-no-lambda": false`.
@@ -2295,7 +2338,7 @@ As I said earlier, the **RefObject** must be accompanied by a **generic type dec
 
 The methodology is the same for every HTML element, but the generic type is respective to which HTML element we are referencing. Here's an example on how to apply the prop type to an SVG and to a button:
 
-***SVG Element:***
+**_SVG Element:_**
 
 ```tsx
   interface ISVGProps {
@@ -2319,22 +2362,20 @@ The methodology is the same for every HTML element, but the generic type is resp
   <SVG reference={myReference} />
 ```
 
-***Button Element:***
+**_Button Element:_**
 
 ```tsx
-  interface IButtonProps {
-    reference?: React.RefObject<HTMLButtonElement>
-  }
+interface IButtonProps {
+  reference?: React.RefObject<HTMLButtonElement>;
+}
 
-  const button = (props: IButtonProps) => {
-    return (
-      <button ref={props.reference} />
-    )
-  }
+const button = (props: IButtonProps) => {
+  return <button ref={props.reference} />;
+};
 
-  // ...
+// ...
 
-  <Button reference={props.reference} />
+<Button reference={props.reference} />;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2352,22 +2393,18 @@ type React.ReactNode = string | number | boolean | {} | React.ReactElement<any, 
 Pretty long, right? Good thing it exists. Here is an example of how we can use it, along with the reference prop type:
 
 ```tsx
-  interface IButtonProps {
-    reference?: React.RefObject<HTMLButtonElement>
-    children?: React.ReactNode
-  }
+interface IButtonProps {
+  reference?: React.RefObject<HTMLButtonElement>;
+  children?: React.ReactNode;
+}
 
-  const button = (props: IButtonProps) => {
-    return (
-      <button ref={props.reference}>{props.children}</button>
-    )
-  }
+const button = (props: IButtonProps) => {
+  return <button ref={props.reference}>{props.children}</button>;
+};
 
-  // ...
+// ...
 
-  <Button reference={props.reference}>
-    {props.children}
-  </Button>
+<Button reference={props.reference}>{props.children}</Button>;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2387,33 +2424,35 @@ The type definition can be imported from the **React default export object** jus
 Here's how we can pass CSS classes and style properties down to our component:
 
 ```tsx
-  interface IButtonProps {
-    reference?: React.RefObject<HTMLButtonElement>
-    children?: React.ReactNode
-    // CSS
-    style?: React.CSSProperties
-    className?: string
-  }
+interface IButtonProps {
+  reference?: React.RefObject<HTMLButtonElement>;
+  children?: React.ReactNode;
+  // CSS
+  style?: React.CSSProperties;
+  className?: string;
+}
 
-  const button = (props: IButtonProps) => {
-    return (
-      <button
-        style={props.style}
-        className={props.className}
-        ref={props.reference}>
-        {props.children}
-      </button>
-    )
-  }
+const button = (props: IButtonProps) => {
+  return (
+    <button
+      style={props.style}
+      className={props.className}
+      ref={props.reference}
+    >
+      {props.children}
+    </button>
+  );
+};
 
-  // ...
+// ...
 
-  <Button
-      className={classes.Button}
-      style={{ backgroundColor: 'gold', color: '#FFF' }}
-      reference={props.reference}>
-    {props.children}
-  </Button>
+<Button
+  className={classes.Button}
+  style={{ backgroundColor: "gold", color: "#FFF" }}
+  reference={props.reference}
+>
+  {props.children}
+</Button>;
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2424,52 +2463,58 @@ Here's how we can pass CSS classes and style properties down to our component:
 
 Let's finish our button. We'll now create an interface declaring most of the possible HTML-5 properties a button can accept, such as mouse in and out and click event listeners, CSS classes, CSS styles, form properties (form, formaction, formenctype, etc.), value, among others.
 
-***Button.tsx***
+**_Button.tsx_**
 
 ```tsx
-  interface IButtonProps {
-    reference?: React.RefObject<HTMLButtonElement>
-    children?: React.ReactNode
-    data: IButtonData
-  }
+interface IButtonProps {
+  reference?: React.RefObject<HTMLButtonElement>;
+  children?: React.ReactNode;
+  data: IButtonData;
+}
 
-  interface IButtonData {
-    // HTML Props
-    type?: string
-    name?: string
-    value?: string | number | string[] | undefined
-    onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined
-    onMouseEnter?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
-    onMouseLeave?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
-    tabIndex?: number | undefined
-    disabled?: boolean
-    // HTML 5 Props
-    autoFocus?: boolean
-    form?: string
-    formAction?: string
-    formEncType?: string
-    formMethod?: string
-    formNoValidate?: boolean
-    formTarget?: string
-    // CSS
-    style?: React.CSSProperties
-    className?: string
-  }
+interface IButtonData {
+  // HTML Props
+  type?: string;
+  name?: string;
+  value?: string | number | string[] | undefined;
+  onClick?:
+    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | undefined;
+  onMouseEnter?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  onMouseLeave?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  tabIndex?: number | undefined;
+  disabled?: boolean;
+  // HTML 5 Props
+  autoFocus?: boolean;
+  form?: string;
+  formAction?: string;
+  formEncType?: string;
+  formMethod?: string;
+  formNoValidate?: boolean;
+  formTarget?: string;
+  // CSS
+  style?: React.CSSProperties;
+  className?: string;
+}
 
-  const data: IButtonData = {...props.data}
+const data: IButtonData = { ...props.data };
 
-  export const button = (props: IButtonProps) => {
-    return (
-      <button ref={props.reference} {...data}>
-        {props.children}
-      </button>
-    )
-  }
+export const button = (props: IButtonProps) => {
+  return (
+    <button ref={props.reference} {...data}>
+      {props.children}
+    </button>
+  );
+};
 ```
 
 Let's now call our button component inside an **App.js** file then pass some props:
 
-***App.js***
+**_App.js_**
 
 ```js
   /// ...
@@ -2512,14 +2557,12 @@ Let's start with the `useRef` API first:
 The general idea is to define the reference with a generic HTML type while initializing them as `null`. This is to let TypeScript know what kind of variable will be stored. Here's an example using an input element:
 
 ```tsx
-  const input = () => {
-    // Initialize the reference as null while letting TypeScript know it's an input element.
-    const myInput = useRef<HTMLInputElement>(null)
+const input = () => {
+  // Initialize the reference as null while letting TypeScript know it's an input element.
+  const myInput = useRef<HTMLInputElement>(null);
 
-    return (
-      <input ref={myInput} type='text' />
-    );
-  }
+  return <input ref={myInput} type="text" />;
+};
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2531,21 +2574,19 @@ The general idea is to define the reference with a generic HTML type while initi
 Similarly to how we just created a reference using the `useRef` API, let's now use the `React.createRef` API to set up a reference by initializing it as null and declaring the HTML type:
 
 ```tsx
-  /// ...
+/// ...
 
-  class Input extends Component {
-    constructor() {
-      super()
-      // Initialize the reference as null while letting TypeScript know it's an input element.
-      this.myInput = React.createRef<HTMLInputElement>(null)
-    }
-
-    render() {
-      return (
-        <input ref={this.myInput} type='text' />
-      )
-    }
+class Input extends Component {
+  constructor() {
+    super();
+    // Initialize the reference as null while letting TypeScript know it's an input element.
+    this.myInput = React.createRef<HTMLInputElement>(null);
   }
+
+  render() {
+    return <input ref={this.myInput} type="text" />;
+  }
+}
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2561,45 +2602,46 @@ There are many types of events. Because of this, when accessing an event, we mus
 Let's create two event handlers, a `MouseEvent` handler that will prevent the default event, trigger an alert displaying our value, then reset our input's value on upon clicking a button, and finally, an `InputEvent` handler that will listen to our input element value changes. Let's expand our previous example:
 
 ```tsx
-  /// ...
-  
-  const input = () => {
-    const [inputValue, setInputValue] = React.useState('')
+/// ...
 
-    // Initialize the reference as null while letting TypeScript know it's an input element.
-    const myInput = useRef<HTMLInputElement>(null)
+const input = () => {
+  const [inputValue, setInputValue] = React.useState("");
 
-    /**
-     * Our InputEvent listener.
-     */
-    const onChangeHandler = (event: React.InputEvent) => {
-      const value = event.target.value
-      console.log(myInput.current.value)
-      setInputValue(value)
-    }
+  // Initialize the reference as null while letting TypeScript know it's an input element.
+  const myInput = useRef<HTMLInputElement>(null);
 
-    /**
-     * Our MouseEvent listener.
-     */
-    const onClickHandler = (event: React.MouseEvent) => {
-      event.preventDefault()
-      alert(inputValue)
-      setInputValue('')
-    }
+  /**
+   * Our InputEvent listener.
+   */
+  const onChangeHandler = (event: React.InputEvent) => {
+    const value = event.target.value;
+    console.log(myInput.current.value);
+    setInputValue(value);
+  };
 
-    return (
-      <form>
-        <input
-          ref={myInput}
-          value={inputValue}
-          onChange={onChangeHandler}
-          type='text' />
-        <button onClick={onClickHandler}>
-          Click me to reset the input field!
-        </button>
-      </form>
-    );
-  }
+  /**
+   * Our MouseEvent listener.
+   */
+  const onClickHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
+    alert(inputValue);
+    setInputValue("");
+  };
+
+  return (
+    <form>
+      <input
+        ref={myInput}
+        value={inputValue}
+        onChange={onChangeHandler}
+        type="text"
+      />
+      <button onClick={onClickHandler}>
+        Click me to reset the input field!
+      </button>
+    </form>
+  );
+};
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2611,35 +2653,35 @@ In this section, we will cover how to use the React Hooks implemented in v16.8 i
 Given `useState` , we can specify the type of the returning value by declaring it in TypeScript as follows:
 
 ```tsx
-  const [state, setState] = useHook<T>;
+const [state, setState] = useHook<T>;
 ```
 
 The variable `state`, will be of type `T`. If we defined `T` as:
 
 ```tsx
-  type T = number | null;
+type T = number | null;
 ```
 
 Then `state` and `setState` will be defined as:
 
 ```tsx
-  const state: number | null;
-  const setState: (value: number | null) => void;
+const state: number | null;
+const setState: (value: number | null) => void;
 ```
 
 Or, as the React does it by applying generics for scalability:
 
 ```tsx
-  type Dispatch<A> = (value: A) => void;
-  type SetStateAction<S> = S | ((prevState: S) => S);
+type Dispatch<A> = (value: A) => void;
+type SetStateAction<S> = S | ((prevState: S) => S);
 
-  const state: number | null;
-  const setState: Dispatch<SetStateAction<number | null>>;
+const state: number | null;
+const setState: Dispatch<SetStateAction<number | null>>;
 ```
 
-If the above seems too complicated, don't worry about it too much. The reason they declare type aliases such as `Dispatch` is because they are used in *many* places, and as we have covered already, generics are great for that reason.
+If the above seems too complicated, don't worry about it too much. The reason they declare type aliases such as `Dispatch` is because they are used in _many_ places, and as we have covered already, generics are great for that reason.
 
-If your variable **does not** returns a hook, chances are you will still need to type its parameters, e.g. `useEffect`, or even *custom hooks*. We will talk about custom hooks at the end of this section since it is the most complicated topic due to the literal infinite hooks anyone could make, nevertheless, we will try to showcase the typing of custom hooks similar to how React types their own "default" hooks by taking a look at some of their own hooks as examples, with the intention of making them as general and broad as possible.
+If your variable **does not** returns a hook, chances are you will still need to type its parameters, e.g. `useEffect`, or even _custom hooks_. We will talk about custom hooks at the end of this section since it is the most complicated topic due to the literal infinite hooks anyone could make, nevertheless, we will try to showcase the typing of custom hooks similar to how React types their own "default" hooks by taking a look at some of their own hooks as examples, with the intention of making them as general and broad as possible.
 
 [⬆️ Back to top](#table-of-contents)<br>
 
@@ -2650,12 +2692,13 @@ Arguably the most basic hook. Because of this, let's discuss one more point abou
 1. By typing the returned value.
 2. By typing the hook.
 
-As shown above, `useState` will return an array with two values. The first value of the array will be our  that can be defined as:
+As shown above, `useState` will return an array with two values. The first value of the array will be our that can be defined as:
 
 By typing the returned value:
 
 ```tsx
-const [state, setState]: [S: Dispatch<SetStateAction<S>>] = useState(initialState);
+const [state, setState]: [S: Dispatch<SetStateAction<S>>] =
+  useState(initialState);
 ```
 
 By typing the hook:
@@ -2667,45 +2710,45 @@ const [state, setState] = useState<S>(initialState);
 Both:
 
 ```tsx
-const [state, setState]: [S: Dispatch<SetStateAction<S>>] = useState<S>(initialState);
+const [state, setState]: [S: Dispatch<SetStateAction<S>>] =
+  useState<S>(initialState);
 ```
 
 Obviously, option number 3 is borderline overkill. Option number 2 is easily the most readable of the three and will be the most commonly typed expression you might come across. Let's have a look a more practical example of a hero slider component by building up its initial settings:
 
 ```tsx
-  interface ISettings {
-    slidingDuration: number
-    isSmartSliding: boolean
-    shouldAutoplay: boolean
-    width: WidthProperty<string | number>
-    height: HeightProperty<string | number>
-  }
+interface ISettings {
+  slidingDuration: number;
+  isSmartSliding: boolean;
+  shouldAutoplay: boolean;
+  width: WidthProperty<string | number>;
+  height: HeightProperty<string | number>;
+}
 
-  /**
-   * Initial settings for the slider.
-   */
-  const initialSettings: ISettings = {
-    slidingDuration: 500,
-    isSmartSliding: true,
-    shouldAutoplay: true,
-    autoplayDuration: 8000,
-    width: '100%',
-    height: '100%',
-    ...props.settings
-  }
+/**
+ * Initial settings for the slider.
+ */
+const initialSettings: ISettings = {
+  slidingDuration: 500,
+  isSmartSliding: true,
+  shouldAutoplay: true,
+  autoplayDuration: 8000,
+  width: "100%",
+  height: "100%",
+  ...props.settings,
+};
 
-  const [settings, setSettings] = React.useState<ISettings>(initialSettings)
+const [settings, setSettings] = React.useState<ISettings>(initialSettings);
 
-  
-  /**
-   * Subscribes to any changes made to the settings, then re-sets them through `setSettings`.
-   */
-  React.useEffect(() => {
-    setSettings({
-      ...settings,
-      ...props.settings as ISettings
-    })
-  }, [props.settings])
+/**
+ * Subscribes to any changes made to the settings, then re-sets them through `setSettings`.
+ */
+React.useEffect(() => {
+  setSettings({
+    ...settings,
+    ...(props.settings as ISettings),
+  });
+}, [props.settings]);
 ```
 
 The example above is a snippet of [this component](https://github.com/rmolinamir/hero-slider/blob/master/src/Slider/HeroSlider.tsx). The slider is being configured with its initial default settings, or any other settings the developer may have passed down to it. Then, by setting up a subscription to any changes made to the `settings` property, we use the `useEffects` hook that will re-set the settings by executing the dispatched returned from `useState`.
@@ -2713,7 +2756,9 @@ The example above is a snippet of [this component](https://github.com/rmolinamir
 Finally, as you may have already been able to tell; `useState` is defined by the React team as:
 
 ```tsx
-  function useState<S>(initialState: S | (() => S)): [S, Dispatch<SetStateAction<S>>];
+function useState<S>(
+  initialState: S | (() => S)
+): [S, Dispatch<SetStateAction<S>>];
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2771,150 +2816,146 @@ Here is a basic example of `useContext`, which provides CSS styling to buttons t
 Let's start by defining the context created by React:
 
 ```tsx
-  interface IContextProps {
-    // CSS Classes
-    className?: string
-    classNames: IClassNamesByButton
-    setGlobalClassName?: (className: string) => void
-    setCustomClassname?: (classNameKey:string, className: string) => void
-    // CSS Properties
-    style?: React.CSSProperties
-    setStyle?: (CSSstyles: React.CSSProperties) => void
-    // React Children
-    children?: React.ReactNode
-  }
+interface IContextProps {
+  // CSS Classes
+  className?: string;
+  classNames: IClassNamesByButton;
+  setGlobalClassName?: (className: string) => void;
+  setCustomClassname?: (classNameKey: string, className: string) => void;
+  // CSS Properties
+  style?: React.CSSProperties;
+  setStyle?: (CSSstyles: React.CSSProperties) => void;
+  // React Children
+  children?: React.ReactNode;
+}
 
-  /**
-   * Button functionality and context.
-   */
-  const initialContext: IContextProps = {
-    className: [classes.Button, classes.Disabled].join(' '),
-    classNames: classNamesByButton,
-    style: undefined,
-  }
+/**
+ * Button functionality and context.
+ */
+const initialContext: IContextProps = {
+  className: [classes.Button, classes.Disabled].join(" "),
+  classNames: classNamesByButton,
+  style: undefined,
+};
 
-  const Context: React.Context<IContextProps> = React.createContext(initialContext)
+const Context: React.Context<IContextProps> =
+  React.createContext(initialContext);
 ```
 
 Imported the context and other necessary dependencies, then using `useContext`:
 
 ```tsx
 // ...
-const useContext = { React }
-import { Context, capitalizeString } from './context'
-import classes from './Button.css'
+const useContext = { React };
+import { Context, capitalizeString } from "./context";
+import classes from "./Button.css";
 
 interface IButtonProps extends IButtonData {
-  button: string,
-  reference?: React.RefObject<HTMLButtonElement>
-  children?: React.ReactNode
-  blockButton?: boolean
+  button: string;
+  reference?: React.RefObject<HTMLButtonElement>;
+  children?: React.ReactNode;
+  blockButton?: boolean;
 }
 
 const ButtonComponent = (props: IButtonProps) => {
-  const context = useContext(Context)
-  const { className, classNames } = context
+  const context = useContext(Context);
+  const { className, classNames } = context;
 
-  const buttonClasses: (string | undefined)[] = [className]
+  const buttonClasses: (string | undefined)[] = [className];
 
   // Classes are picked depending on the `button` prop of type string
-  const button: string | undefined = props.button ? capitalizeString(props.button) : undefined
+  const button: string | undefined = props.button
+    ? capitalizeString(props.button)
+    : undefined;
 
   // Boolean to keep track of matched CSS classes, sort of like a hash.
-  let bIsMatch = false
+  let bIsMatch = false;
 
   // Selects a className from the imported context.
   if (button) {
     if (classNames[button]) {
-      bIsMatch = true
-      buttonClasses.push(classNames[button])
+      bIsMatch = true;
+      buttonClasses.push(classNames[button]);
     }
   }
 
   // In case there were no matches, then set the button class equal to the Default class.
   if (!bIsMatch) {
-    buttonClasses.push(classes.Default)
+    buttonClasses.push(classes.Default);
   }
 
   /**
    * We are omitting the blockButton, children, and reference
    * props from the data button properties.
    */
-  const { blockButton, reference, children, ...data } = props
+  const { blockButton, reference, children, ...data } = props;
 
   /**
    * If blockButton is true, then apply the BlockButton class.
    */
   if (blockButton) {
-    buttonClasses.push(classes.BlockButton)
+    buttonClasses.push(classes.BlockButton);
   }
 
   /**
    * Build the button data object that will be passed down to the Button component.
    */
-  const buttonData: IButtonData = ButtonData.setData( { ...data }, buttonClasses)
+  const buttonData: IButtonData = ButtonData.setData(
+    { ...data },
+    buttonClasses
+  );
 
   /**
    * CSS Properties.
    */
-  buttonData.style = context.style || props.style
+  buttonData.style = context.style || props.style;
 
   return (
-    <Button
-      reference={reference}
-      data={buttonData}
-    >
+    <Button reference={reference} data={buttonData}>
       {children}
     </Button>
-  )
-}
+  );
+};
 
-export default ButtonComponent
-
+export default ButtonComponent;
 ```
 
 Lets have a look at a more advanced example of `useContext` typing, that composes the multiple contexts argument of a higher-order component, which then passes down the composed contexts as prop to the wrapped component:
 
 ```tsx
-  interface IContexts {
-    [propName: string]: React.Context<any>
-  }
+interface IContexts {
+  [propName: string]: React.Context<any>;
+}
 
-  const withContexts = (
-      WrappedComponent: React.JSXElementConstructor<any>,
-      Contexts: IContexts,
-    ) => {
-    return (props: any) => {
-      const contextKeys: string[] = Object.keys(Contexts)
+const withContexts = (
+  WrappedComponent: React.JSXElementConstructor<any>,
+  Contexts: IContexts
+) => {
+  return (props: any) => {
+    const contextKeys: string[] = Object.keys(Contexts);
 
-      /**
-       * Reducing the array of context keys, based on the `Contexts`
-       * object, into another object with the returned context values
-       * from `useContext`.
-       */
-      const usedContexts = contextKeys.reduce(
-        (
-          contexts: { [propName: string]: any },
-          key: string
-        ) => {
-          return Object.assign(
-            contexts,
-            { [key]: useContext<any>(Contexts[key]) }
-          )
-        },
-        {} // Initial value
-      )
+    /**
+     * Reducing the array of context keys, based on the `Contexts`
+     * object, into another object with the returned context values
+     * from `useContext`.
+     */
+    const usedContexts = contextKeys.reduce(
+      (contexts: { [propName: string]: any }, key: string) => {
+        return Object.assign(contexts, {
+          [key]: useContext<any>(Contexts[key]),
+        });
+      },
+      {} // Initial value
+    );
 
-      const newProps: { [propName: string]: any } = {
-        usedContexts,
-        ...props
-      }
+    const newProps: { [propName: string]: any } = {
+      usedContexts,
+      ...props,
+    };
 
-      return (
-        <WrappedComponent {...newProps} />
-      );
-    }
-  }
+    return <WrappedComponent {...newProps} />;
+  };
+};
 ```
 
 [⬆️ Back to top](#table-of-contents)<br>
@@ -2929,19 +2970,26 @@ Perhaps the "primordial" hook, many hooks are based on how `useReducer` works, i
 Or both! Whatever may be the case, using TypeScript with `useReducer` is not too hard, but it's certainly a bit tedious because there are many variables involved, assuming that at least the basics of `useReducer` are known. The good news is that every reducer will follow the same steps whenever typing it. Before going into details about how to define types for the reducer, let's have a look at how the React team defined `useReducer`:
 
 ```ts
-  function useReducer<R extends Reducer<any, any>>(
-    reducer: R,
-    initialState: ReducerState<R>,
-    initializer?: undefined
-  ): [ReducerState<R>, Dispatch<ReducerAction<R>>];
+function useReducer<R extends Reducer<any, any>>(
+  reducer: R,
+  initialState: ReducerState<R>,
+  initializer?: undefined
+): [ReducerState<R>, Dispatch<ReducerAction<R>>];
 ```
 
 The first thing you might notice, is that it is very similar to `useState`. As mentioned above, `useState` is actually a very simplified version of `useReducer`, where you have a dispatcher and a state variable. The types `ReducerState` and `ReducerAction` are also defined as:
 
 ```ts
-  type Reducer<S, A> = (prevState: S, action: A) => S;
-  type ReducerState<R extends Reducer<any, any>> = R extends Reducer<infer S, any> ? S : never;
-  type ReducerAction<R extends Reducer<any, any>> = R extends Reducer<any, infer A> ? A : never;
+type Reducer<S, A> = (prevState: S, action: A) => S;
+type ReducerState<R extends Reducer<any, any>> = R extends Reducer<infer S, any>
+  ? S
+  : never;
+type ReducerAction<R extends Reducer<any, any>> = R extends Reducer<
+  any,
+  infer A
+>
+  ? A
+  : never;
 ```
 
 The main take of this, is that reducers are functions that take a previous state as a first argument, and an action **(which includes the payload)** as a second argument. This action will let the programmer decide what to do in the reducer. Let's now compare how your typical `useReducer` looks like in JavaScript to a typical `useReducer` in TypeScript:
@@ -2949,13 +2997,15 @@ The main take of this, is that reducers are functions that take a previous state
 **JavaScript**:
 
 ```jsx
-  const [state, dispatch] = React.useReducer(reducer, initialState)
+const [state, dispatch] = React.useReducer(reducer, initialState);
 ```
 
 **TypeScript**:
 
 ```tsx
-  const [state, dispatch] = React.useReducer<React.Reducer<IInputState, IReducerAction>>(reducer, initialState)
+const [state, dispatch] = React.useReducer<
+  React.Reducer<IInputState, IReducerAction>
+>(reducer, initialState);
 ```
 
 That's it! That's all there is to typing an `useReducer`. However, let's have a look at a real `useReducer` example that handles an input's value, validity, and a touched state that becomes `true` when interacted with. This example will cover:
@@ -2969,99 +3019,101 @@ Having said all that, to sum up, any and every `useReducer` can be built by foll
 2. Define a reducer, and apply our defined types to it, the reducer will typically look like this:
 
 ```tsx
-  const reducer = (state: IState, action: IReducerAction) => {
-    const { handler, ...newState } = action
-    switch (handler) {
-      case EActionHandler.TYPE: // Enum member
-        return {
-          ...state,
-          ...newState
-        }
-      default:
-        throw new Error()
-    }
+const reducer = (state: IState, action: IReducerAction) => {
+  const { handler, ...newState } = action;
+  switch (handler) {
+    case EActionHandler.TYPE: // Enum member
+      return {
+        ...state,
+        ...newState,
+      };
+    default:
+      throw new Error();
   }
+};
 ```
 
 3. Lastly, define a `initialState` variable if needed, and a `useReducer` hook inside the React component, then it's good to go. The `useReducer` declaration will almost always look like this:
 
 ```tsx
-  const [state, dispatch] = React.useReducer<React.Reducer<IState, IReducerAction>>(reducer, initialState)
+const [state, dispatch] = React.useReducer<
+  React.Reducer<IState, IReducerAction>
+>(reducer, initialState);
 ```
 
 Let's apply these steps to our example. Let's begin by typing the necessary `interface` structures for the following variables, and the reducer `enum` for the action types:
 
 ```tsx
-  /**
-   * REDUCER TYPE DEFINITIONS:
-   */
+/**
+ * REDUCER TYPE DEFINITIONS:
+ */
 
-  // `reducer` action types.
-  enum EOnChangeHandler {
-    VALUE,
-    VALID,
-    TOUCHED,
-    STATE
-  }
+// `reducer` action types.
+enum EOnChangeHandler {
+  VALUE,
+  VALID,
+  TOUCHED,
+  STATE,
+}
 
-  // `state` and `initialState`.
-  interface IInputState {
-    identifier?: string
-    value?: value
-    validationMessage: string
-    className?: string
-    valueType?: string
-    validation?: IInputValidation
-    style?: React.CSSProperties
-    placeholder?: string
-    elementConfig?: IInputConfig
-    required?: boolean
-    valid?: boolean
-    shouldValidate?: boolean
-    touched?: boolean
-  }
+// `state` and `initialState`.
+interface IInputState {
+  identifier?: string;
+  value?: value;
+  validationMessage: string;
+  className?: string;
+  valueType?: string;
+  validation?: IInputValidation;
+  style?: React.CSSProperties;
+  placeholder?: string;
+  elementConfig?: IInputConfig;
+  required?: boolean;
+  valid?: boolean;
+  shouldValidate?: boolean;
+  touched?: boolean;
+}
 
-  // Interface for the `validation` property of `IInputState`.
-  interface IInputValidation {
-    customRules?: ICustomRulesValidation
-    required?: boolean
-    email?: boolean
-    number?: boolean
-    minLength?: number
-    maxLength?: number
-  }
+// Interface for the `validation` property of `IInputState`.
+interface IInputValidation {
+  customRules?: ICustomRulesValidation;
+  required?: boolean;
+  email?: boolean;
+  number?: boolean;
+  minLength?: number;
+  maxLength?: number;
+}
 
-  // For the `dispatch` actions/arguments.
-  interface IReducerAction extends IInputState {
-    handler: EOnChangeHandler
-    valid: boolean
-  }
+// For the `dispatch` actions/arguments.
+interface IReducerAction extends IInputState {
+  handler: EOnChangeHandler;
+  valid: boolean;
+}
 ```
 
 Next, let's apply define a `reducer` function and apply typing. Here's where the `interface` and `enum` types come in:
 
 ```tsx
-  const reducer = (state: IInputState, action: IReducerAction) => {
-    const { handler, ...newState } = action
-    switch (handler) {
-      case EOnChangeHandler.STATE:
-        return {
-          ...state,
-          ...newState
-        }
-      case EOnChangeHandler.TOUCHED:
-        state.touched = newState.touched
-        return state
-      case EOnChangeHandler.VALID:
-        state.valid = newState.valid
-        return state
-      case EOnChangeHandler.VALUE:
-        state.value = newState.value
-        return state
-      default:
-        throw new Error()
-    }
+const reducer = (state: IInputState, action: IReducerAction) => {
+  const { handler, ...newState } = action;
+  switch (handler) {
+    case EOnChangeHandler.STATE:
+      return {
+        ...state,
+        ...newState,
+      };
+    case EOnChangeHandler.TOUCHED:
+      state.touched = newState.touched;
+      return state;
+    case EOnChangeHandler.VALID:
+      state.valid = newState.valid;
+      return state;
+    case EOnChangeHandler.VALUE:
+      state.value = newState.value;
+      return state;
+    default:
+      throw new Error();
   }
+};
 ```
 
 Let's now define our `initialState` variable, and our `useReducer` hook inside our input component, and then we'll plug everything up:
@@ -3179,7 +3231,7 @@ Finally, let's plug everything up and see our reducer in action:
     }
 
     const [state, dispatch] = React.useReducer<React.Reducer<IInputState, IReducerAction>>(reducer, initialState)
-  
+
     /**
      * -------------------------------------
      * ----------REDUCER DISPATCHERS--------
@@ -3240,14 +3292,17 @@ Finally, let's plug everything up and see our reducer in action:
 
 ### useCallback
 
-Both `useCallback` and `useMemo` are commonly compared to `shouldComponentUpdate`. This is because both of the previously mentioned hooks return [*memoized*](https://en.wikipedia.org/wiki/Memoization) callbacks and values respectively. Memoization is basically caching the results of expensive functions in case they are executed again, and if so, then the cached values will be returned instead of executing the functions, which in turn will increase performance.
+Both `useCallback` and `useMemo` are commonly compared to `shouldComponentUpdate`. This is because both of the previously mentioned hooks return [_memoized_](https://en.wikipedia.org/wiki/Memoization) callbacks and values respectively. Memoization is basically caching the results of expensive functions in case they are executed again, and if so, then the cached values will be returned instead of executing the functions, which in turn will increase performance.
 
 To summarize, they are commonly used to increase performance, which is the reason they're compared to `shouldComponentUpdate`, and, `useCallback` will be used for functions whereas `useMemo` will be used for values.
 
 `useCallback` is defined as:
 
 ```ts
-  function useCallback<T extends (...args: any[]) => any>(callback: T, deps: DependencyList): T;
+function useCallback<T extends (...args: any[]) => any>(
+  callback: T,
+  deps: DependencyList
+): T;
 ```
 
 As you can see, it's very simply. Notice the following:
@@ -3256,12 +3311,12 @@ As you can see, it's very simply. Notice the following:
 2. As a second argument, it accepts a dependency list. This dependency list is nothing more than a read only array that the hook will subscribe to. If any of them change, the hook will execute. `DependencyList` is defined as:
 
 ```ts
-  type DependencyList = ReadonlyArray<any>;
+type DependencyList = ReadonlyArray<any>;
 ```
 
 Remember that `ReadonlyArray` is a native TypeScript type. Moving on, using `useCallback` in TypeScript is very easy since it's configured to accept `any` types. Here's a simple yet shallow example of a real-life application of `useCallback`.
 
-The following `useCallback` application will return a function that will be *throttled* in a later hook (which is actually featured in the custom hooks section). This function will execute whenever the user scrolls through the page, and will mix two colors depending on where the user is and depending on which RBG channels colors should be mixed. Finally, the new mixed color is set through the `setBackgroundColor` dispatcher.
+The following `useCallback` application will return a function that will be _throttled_ in a later hook (which is actually featured in the custom hooks section). This function will execute whenever the user scrolls through the page, and will mix two colors depending on where the user is and depending on which RBG channels colors should be mixed. Finally, the new mixed color is set through the `setBackgroundColor` dispatcher.
 
 ```ts
   const onThrottledScrollHandler = useCallback(() => {
@@ -3285,15 +3340,15 @@ The following `useCallback` application will return a function that will be *thr
 
 Very similar to `useCallback`. As mentioned previously, `useMemo` is commonly compared to `shouldComponentUpdate`.
 
-> This is because both of the previously mentioned hook return [*memoized*](https://en.wikipedia.org/wiki/Memoization) callbacks and values respectively. Memoization is basically caching the results of expensive functions in case they are executed again, and if so, then the cached values will be returned instead of executing the functions, which in turn will increase performance.
+> This is because both of the previously mentioned hook return [_memoized_](https://en.wikipedia.org/wiki/Memoization) callbacks and values respectively. Memoization is basically caching the results of expensive functions in case they are executed again, and if so, then the cached values will be returned instead of executing the functions, which in turn will increase performance.
 
 Instead of returning a function as `useCallback` does, `useMemo` will return a value. The React team defines `useMemo` as:
 
 ```ts
-  function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
+function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
 ```
 
-Same as every single hook shown before, generics are dominant. `useMemo` will take a *factory* or *create* function that returns a value of type `T` (think of React components, for example), and a dependency list to subscribe to. If any of the values in the list change, the hook will execute again. Otherwise it'll simply return the cached result!
+Same as every single hook shown before, generics are dominant. `useMemo` will take a _factory_ or _create_ function that returns a value of type `T` (think of React components, for example), and a dependency list to subscribe to. If any of the values in the list change, the hook will execute again. Otherwise it'll simply return the cached result!
 
 `useMemo` is a very, very useful hook. It can be implemented in many, many places within any application to improve performances. Here are some very simple examples of `useMemo` used inside [this hero-slider component](https://github.com/rmolinamir/hero-slider/blob/master/src/Slider/HeroSlider.tsx).
 
@@ -3388,9 +3443,9 @@ There are two worker functions declared as `getChildren` and `setSlides` that ca
 
 ### useRef
 
-`useRef` is a hook commonly used to set up a reference to a DOM node. Unfortunately, most articles about this hook touch upon using `useRef` *only* to setup references to DOM nodes, as just previously mentioned. In reality, `useRef` sets a reference to a mutable object which is then paired to a DOM node, but, there are *a lot* of equally or even more useful applications.
+`useRef` is a hook commonly used to set up a reference to a DOM node. Unfortunately, most articles about this hook touch upon using `useRef` _only_ to setup references to DOM nodes, as just previously mentioned. In reality, `useRef` sets a reference to a mutable object which is then paired to a DOM node, but, there are _a lot_ of equally or even more useful applications.
 
-Before talking about different `useRef` applications other than DOM nodes, it is worth mentioning that `useRef` behaves very similarly to pointers. [In computer science, a *pointer* is defined as](https://en.wikipedia.org/wiki/Pointer_(computer_programming)):
+Before talking about different `useRef` applications other than DOM nodes, it is worth mentioning that `useRef` behaves very similarly to pointers. [In computer science, a _pointer_ is defined as](<https://en.wikipedia.org/wiki/Pointer_(computer_programming)>):
 
 > A pointer references a location in memory, and obtaining the value stored at that location is known as dereferencing the pointer. As an analogy, a page number in a book's index could be considered a pointer to the corresponding page; dereferencing such a pointer would be done by flipping to the page with the given page number and reading the text found on that page.
 
@@ -3399,15 +3454,15 @@ The most obvious comparison would be C++ pointers. With the references returned 
 `useRef` is defined by the React team as:
 
 ```ts
-  function useRef<T>(initialValue: T): MutableRefObject<T>;
+function useRef<T>(initialValue: T): MutableRefObject<T>;
 ```
 
 Very, very straightforward, but what's important here is to take a look at the `MutableRefObject` interface:
 
 ```tsx
-  interface MutableRefObject<T> {
-    current: T;
-  }
+interface MutableRefObject<T> {
+  current: T;
+}
 ```
 
 It is quite literally just an object defined as `{ current: T }`. Where `T`, can be anything. The React team has a very good explanation as to how `useRef` works:
@@ -3527,17 +3582,18 @@ In this initial setup, by passing unset `useRef` mutable objects as props down t
 Here's what the React team has to say about this hook:
 
 > `useImperativeHandle` customizes the instance value that is exposed to parent components when using:
+
     - `ref`. As always, imperative code using refs should be avoided in most cases.
     - `useImperativeHandle` should be used with `React.forwardRef`.
 
 `useImperativeHandle` is defined by the React team as:
 
 ```tsx
-  function useImperativeHandle<T, R extends T>(
-    ref: Ref<T>|undefined,
-    init: () => R,
-    deps?: DependencyList
-  ): void;
+function useImperativeHandle<T, R extends T>(
+  ref: Ref<T> | undefined,
+  init: () => R,
+  deps?: DependencyList
+): void;
 ```
 
 Where:
@@ -3551,51 +3607,54 @@ Where:
 First, let's define a component that uses `useImperativeHandle` then apply `forwardRef` on it to expose the `ref` object:
 
 ```tsx
-  interface IInputRefObject {
-    exposedFocusMethod (): void
-  }
+interface IInputRefObject {
+  exposedFocusMethod(): void;
+}
 
-  interface IInputProps {
-    [propName: string]: any;
-  }
+interface IInputProps {
+  [propName: string]: any;
+}
 
-  const Input: React.RefForwardingComponent<IInputRefObject, IInputProps> = (props, ref) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(ref, () => ({
-      exposedFocusMethod: () => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-          /// Possibly more logic
-        };
+const Input: React.RefForwardingComponent<IInputRefObject, IInputProps> = (
+  props,
+  ref
+) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(ref, () => ({
+    exposedFocusMethod: () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        /// Possibly more logic
       }
-    }));
-    return <input ref={inputRef} {...props} />;
-  }
-  
-  const ImperativeInput = forwardRef(Input);
-  export default ImperativeInput;
+    },
+  }));
+  return <input ref={inputRef} {...props} />;
+};
+
+const ImperativeInput = forwardRef(Input);
+export default ImperativeInput;
 ```
 
 Now let's use it in a parent component, and access `ref`:
 
 ```tsx
-  interface IAutofocusProps {
-    shouldFocusOnMount: boolean;
-    [propName: string]: any;
-  }
+interface IAutofocusProps {
+  shouldFocusOnMount: boolean;
+  [propName: string]: any;
+}
 
-  const AutofocusedInput = (props: IAutofocusProps) => {
-    const { shouldFocusOnMount = true, ...rest } = props;
-    const myInputRef = useRef<IInputRefObject>(null);
+const AutofocusedInput = (props: IAutofocusProps) => {
+  const { shouldFocusOnMount = true, ...rest } = props;
+  const myInputRef = useRef<IInputRefObject>(null);
 
-    useEffect(() => {
-      if (shouldFocusOnMount && myInputRef.current) {
-        myInputRef.current.exposedFocusMethod();
-      }
-    }, [shouldFocusOnMount]);
+  useEffect(() => {
+    if (shouldFocusOnMount && myInputRef.current) {
+      myInputRef.current.exposedFocusMethod();
+    }
+  }, [shouldFocusOnMount]);
 
-    return <ImperativeInput ref={myInputRef} {...rest} />
-  }
+  return <ImperativeInput ref={myInputRef} {...rest} />;
+};
 ```
 
 Notice how the `AutofocusedInput` component focuses on functionality with almost no declarations. The `focus` propety of the `ImperativeInput` component's DOM node is not directly executed inside `AutofocusedInput`, instead we are executing the exposed method declared as `exposedFocusMethod`, which then executes `focus`. This is why the React team named this hook as `useImperativeHandle`.
@@ -3615,12 +3674,12 @@ One scenario where the program might need to wait for the initial rendering, is 
 Here's how the React team defines `useLayoutEffect` (which is literally identical to the definition of `useEffect`), and what do they have to say about it:
 
 ```tsx
-  function useLayoutEffect(effect: EffectCallback, deps?: DependencyList): void;
+function useLayoutEffect(effect: EffectCallback, deps?: DependencyList): void;
 ```
 
 > The signature is identical to `useEffect`, but it fires synchronously after all DOM mutations. **Use this to read layout from the DOM and synchronously re-render. Updates scheduled inside `useLayoutEffect` will be flushed synchronously, before the browser has a chance to paint.**
-Prefer the standard `useEffect` when possible to avoid blocking visual updates.
-If you’re migrating code from a class component, `useLayoutEffect` fires in the same phase as `componentDidMount` and `componentDidUpdate`.
+> Prefer the standard `useEffect` when possible to avoid blocking visual updates.
+> If you’re migrating code from a class component, `useLayoutEffect` fires in the same phase as `componentDidMount` and `componentDidUpdate`.
 
 [⬆️ Back to top](#table-of-contents)<br>
 
@@ -3633,15 +3692,15 @@ As this is exclusively used for custom hooks, it's recommended by the React team
 `useDebugValue` is defined as:
 
 ```tsx
-  function useDebugValue<T>(value: T, format?: (value: T) => any): void;
+function useDebugValue<T>(value: T, format?: (value: T) => any): void;
 ```
 
-The `value` argument is what will be displayed next to its respective label in the *Elements* tab of the React DevTools.
+The `value` argument is what will be displayed next to its respective label in the _Elements_ tab of the React DevTools.
 
 Sometimes though, formatting values might be an expensive operation as noted in the official documentation. For this reason the second parameter `format` exists, where it essentially allows you to access formatting methods, such as:
 
 ```tsx
-useDebugValue(date, date => date.toDateString());
+useDebugValue(date, (date) => date.toDateString());
 ```
 
 Here's an example showcased in the official documentation about `useDebugValue`:
@@ -3654,7 +3713,7 @@ function useFriendStatus(friendID) {
 
   // Show a label in DevTools next to this Hook
   // e.g. "FriendStatus: Online"
-  useDebugValue(isOnline ? 'Online' : 'Offline');
+  useDebugValue(isOnline ? "Online" : "Offline");
 
   return isOnline;
 }
@@ -3687,35 +3746,35 @@ Let's now do our first two custom hooks!
 
 First, let's begin by developing a hook that can throttle **any** callback, within a specified and limited (minimum) amount of time between function calls. Basically, a custom hook used to throttle function callbacks. It will be declared as `useThrottled` and it will accept a `callback` as its first parameter, and a `limit` as its second parameter.
 
-- `callback` can and will be *any* callback that is passed to the hook, and it will **only be executed if the amount of time between the current and last function call is higher than `limit`**.
+- `callback` can and will be _any_ callback that is passed to the hook, and it will **only be executed if the amount of time between the current and last function call is higher than `limit`**.
 - `limit` will be the minimum time required to wait between callbacks.
 
 ```tsx
-  import React from "react";
-  const { useState } = React;
+import React from "react";
+const { useState } = React;
 
-  export const useThrottle = (
-    callback: () => void,
-    limit: number
-  ): (() => void) => {
-    const [callbackTimeoutId, setCallbackTimeoutId] = useState<number>();
-    const [lastCallbackRunDate, setLastCallbackRunDate] = useState<number>();
-    return () => {
-      if (!lastCallbackRunDate) {
-        setLastCallbackRunDate(Date.now());
-      } else {
-        clearTimeout(Number(callbackTimeoutId));
-        setCallbackTimeoutId(
-          setTimeout(() => {
-            if (Date.now() - lastCallbackRunDate >= limit) {
-              callback();
-              setLastCallbackRunDate(Date.now());
-            }
-          }, limit - (Date.now() - lastCallbackRunDate))
-        );
-      }
-    };
+export const useThrottle = (
+  callback: () => void,
+  limit: number
+): (() => void) => {
+  const [callbackTimeoutId, setCallbackTimeoutId] = useState<number>();
+  const [lastCallbackRunDate, setLastCallbackRunDate] = useState<number>();
+  return () => {
+    if (!lastCallbackRunDate) {
+      setLastCallbackRunDate(Date.now());
+    } else {
+      clearTimeout(Number(callbackTimeoutId));
+      setCallbackTimeoutId(
+        setTimeout(() => {
+          if (Date.now() - lastCallbackRunDate >= limit) {
+            callback();
+            setLastCallbackRunDate(Date.now());
+          }
+        }, limit - (Date.now() - lastCallbackRunDate))
+      );
+    }
   };
+};
 ```
 
 The `callback` parameter will **only** execute if the difference between the current date and the last time the callback fire is higher than the throttle limit.
@@ -3723,84 +3782,85 @@ The `callback` parameter will **only** execute if the difference between the cur
 Next, let's develop a hook that handles the scroll event callbacks while also throttling them. We will call this hook `useScrollCallback`:
 
 ```tsx
-  import React from "react";
+import React from "react";
 
-  // Dependencies
-  import { useThrottle } from "../useThrottle";
-  const { useState, useCallback, useEffect } = React;
+// Dependencies
+import { useThrottle } from "../useThrottle";
+const { useState, useCallback, useEffect } = React;
 
-  export const useScrollCallback = (
-    minimumOffset: number = 50, // Minimum height offset to actually execute the callback
-    throttleLimit: number = 500, // Minimum time between calls in milliseconds
-    callback: (scrollPosition: number) => void
-  ) => {
-    const [scrollPosition, setScrollPosition] = useState<number>(
-      window.pageYOffset
-    );
+export const useScrollCallback = (
+  minimumOffset: number = 50, // Minimum height offset to actually execute the callback
+  throttleLimit: number = 500, // Minimum time between calls in milliseconds
+  callback: (scrollPosition: number) => void
+) => {
+  const [scrollPosition, setScrollPosition] = useState<number>(
+    window.pageYOffset
+  );
 
-    const onThrottledScrollHandler = useCallback(() => {
-      const currentScrollHeight = window.pageYOffset;
-      setScrollPosition(currentScrollHeight);
-      if (currentScrollHeight > minimumOffset) callback(scrollPosition);
-    }, [minimumOffset, callback, scrollPosition]);
+  const onThrottledScrollHandler = useCallback(() => {
+    const currentScrollHeight = window.pageYOffset;
+    setScrollPosition(currentScrollHeight);
+    if (currentScrollHeight > minimumOffset) callback(scrollPosition);
+  }, [minimumOffset, callback, scrollPosition]);
 
-    const throttled = useThrottle(onThrottledScrollHandler, throttleLimit);
+  const throttled = useThrottle(onThrottledScrollHandler, throttleLimit);
 
-    useEffect(() => {
-      window.addEventListener("scroll", throttled);
+  useEffect(() => {
+    window.addEventListener("scroll", throttled);
 
-      // Return clause.
-      return () => window.removeEventListener("scroll", throttled);
-    }, [throttled]);
-  };
+    // Return clause.
+    return () => window.removeEventListener("scroll", throttled);
+  }, [throttled]);
+};
 ```
 
 Throttling is a very important concept to keep in mind. Even more so in this case when using the scroll event listener because of how often it fires. By throttling it, we are increasing performance significantly. Let's now create our `App` container to put everything together:
 
 ```tsx
-  // Libraries
-  import * as React from "react";
-  import { render } from "react-dom";
+// Libraries
+import * as React from "react";
+import { render } from "react-dom";
 
-  // Global styles
-  import "./styles.css";
+// Global styles
+import "./styles.css";
 
-  // Hooks
-  import { useScrollCallback } from "./hooks/useOnScrollCallback";
+// Hooks
+import { useScrollCallback } from "./hooks/useOnScrollCallback";
 
-  // Dependencies
-  import randomColor from "randomcolor";
-  const minimumOffset: number = 0; // Minimum height offset to actually execute the callback
-  const throttleLimit: number = 500; // Minimum time between calls in milliseconds
+// Dependencies
+import randomColor from "randomcolor";
+const minimumOffset: number = 0; // Minimum height offset to actually execute the callback
+const throttleLimit: number = 500; // Minimum time between calls in milliseconds
 
-  function App() {
-    /**
-    * We're randomly changing the color of the body when scrolling!
-    */
-    useScrollCallback(minimumOffset, throttleLimit, (scrollPosition: number) => {
-      console.log(`I'm currently scrolling at ${scrollPosition}!`);
-      document.body.style.backgroundColor = randomColor({
-        luminosity: "light",
-        format: "hsla" // e.g. 'hsla(27, 88.99%, 81.83%, 0.6450211517512798)'
-      });
+function App() {
+  /**
+   * We're randomly changing the color of the body when scrolling!
+   */
+  useScrollCallback(minimumOffset, throttleLimit, (scrollPosition: number) => {
+    console.log(`I'm currently scrolling at ${scrollPosition}!`);
+    document.body.style.backgroundColor = randomColor({
+      luminosity: "light",
+      format: "hsla", // e.g. 'hsla(27, 88.99%, 81.83%, 0.6450211517512798)'
     });
-    return (
-      <div className="App">
-        <div className="fixed">
-          <h1>
-            Open the console and scroll the page to see the throttling in action!
-          </h1>
-          <h1>
-            Feel free to experiment by changing the throttle limit to see a change in the frequency of the callbacks.
-          </h1>
-        </div>
-        <div className="empty-space" />
+  });
+  return (
+    <div className="App">
+      <div className="fixed">
+        <h1>
+          Open the console and scroll the page to see the throttling in action!
+        </h1>
+        <h1>
+          Feel free to experiment by changing the throttle limit to see a change
+          in the frequency of the callbacks.
+        </h1>
       </div>
-    );
-  }
+      <div className="empty-space" />
+    </div>
+  );
+}
 
-  const rootElement = document.getElementById("root");
-  render(<App />, rootElement);
+const rootElement = document.getElementById("root");
+render(<App />, rootElement);
 ```
 
 And that's it! A couple of things are worth pointing out:
@@ -3812,50 +3872,8 @@ The key to creating custom hooks is to keep them as consistent as possible with 
 
 Here's the example hosted in CodeSandbox of the hooks shown above, with a few more functionalities to play around with them. Feel free to fork it as well.
 
-[![Custom Hooks example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/custom-hooks-example-68n7l?fontsize=14)  
+[![Custom Hooks example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/custom-hooks-example-68n7l?fontsize=14)
 
 [⬆️ Back to top](#table-of-contents)<br>
 
 ---
-
-## Feedback
-
-This repository. Submit a PR with any change or addition you'd like to see!
-
-And thank you very much for taking the time to do so 💖
-
-[⬆️ Back to top](#table-of-contents)<br>
-
----
-
-## Collaborators
-
-This is a list of all the awesome collaborators (present or past) and contributors of the TypeScript Cheatsheet:
-
-- [evdama](https://github.com/evdama)
-- [KevinKelbie](https://www.reddit.com/user/KevinKelbie)
-- [Ical89](https://github.com/Ical89)
-- [disco0](https://github.com/disco0)
-- [kberg](https://github.com/kberg)
-- [Svish](https://github.com/Svish)
-- [MaxmaxmaximusAWS](https://github.com/MaxmaxmaximusAWS)
-- [nfedyashev](https://github.com/nfedyashev)
-- [jakangah](https://github.com/jakangah)
-- [tobiasbueschel](https://github.com/tobiasbueschel)
-- [ValentinTapiaTorti](https://github.com/ValentinTapiaTorti)
-- [thatseanren](https://github.com/thatseanren)
-
-Make sure to buy them a beer if you ever meet one of them 😊
-
-[⬆️ Back to top](#table-of-contents)<br>
-
----
-
-## Contribute
-
-Contributions are always welcome! Just like before, all you would have to do is submit a PR and I will be reviewing it shortly. If you have any doubts you can let me know at:
-
-- [u/rmolinamir](https://www.reddit.com/user/rmolinamir)
-- [rmolinamir@gmail.com](mailto:rmolinamir@gmail.com)
-
-[⬆️ Back to top](#table-of-contents)<br>
